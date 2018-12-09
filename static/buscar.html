@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./buscar.css">
+</head>
+<body>
+  <h1>Consultar colecciones</h1>
+<div>
+ 
+
+
+ <fieldset id = "langs">
+        <legend> Idioma:</legend>
+        <input type="radio"  name="lang" value="es" id = "es" >Español</option>
+        <input type="radio"  name="lang" value="fr" id = "fr" >Francés</option>
+        <input type="radio"  name="lang" value="en" id = "en">Inglés</option>
+ </fieldset>  
+
+ <br>
+ Coleccion: <input type="text" id="coleccion" value="">
+
+  <input type="submit" value="Consultar" onclick="query()">
+
+</div> 
+
+
+<div id = "resultado">
+        <h2>Resultado: </h2>
+</div >
+
+<div id = "addCollection" class = "invisible">
+    <h2>Añadir Coleccion Nueva</h2>
+    Coleccion:  <input type="text" id="nuevaColeccion" value="">  
+   
+    Imagen: <input type="text" id="nuevoThumb" value="">  
+    <br>
+    Español: <input type="text" id="es_caption" value="" > 
+    <br>
+    Francés: <input type="text" id="fr_caption" value="" > 
+    <br>
+    Inglés: <input type="text" id="en_caption" value="" > 
+    <br>
+
+    <input type="submit" value="Añadir" onclick="create()">
+    <input type="submit" value="Cancelar" onclick="ocultar()">
+
+</div>
+
+</body>
+
+<script src="buscar.js"></script>
+
+</html>

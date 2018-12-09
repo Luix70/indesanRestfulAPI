@@ -1,0 +1,12 @@
+#addCollection {
+           background-color: #ffdddd;
+           padding:1em;
+           
+       }
+
+       .visible{
+        visibility:visible;
+       }
+       .invisible{
+        visibility:hidden;
+       }
