@@ -3,15 +3,8 @@
 
 var res = document.getElementById("resultado");
 var xhr = new XMLHttpRequest;
-var environment ="development";
-var endpoint = "http://localhost:2001/"
-try{
-    port = process.env.PORT;
-    environment = process.env.NODE_ENV;
-    endpoint = `http://indesan.org:${port}/`
-} catch{
 
-}
+var endpoint = "http://indesan.org:2001/"
 
 console.log(endpoint);
 
