@@ -1,10 +1,7 @@
 
-
-
 var res = document.getElementById("resultado");
 var xhr = new XMLHttpRequest;
 
-var endpoint = "http://indesan.org:2001/"
 
 console.log(endpoint);
 

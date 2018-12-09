@@ -8,6 +8,7 @@
 const express=require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const fs = require("fs");
 
 router.use(express.json());
 router.use(express.static("./static"));
@@ -93,6 +94,20 @@ router.get("/",(req,res)=>{
     });
     
 })
+
+function devolverForm(req,res){
+    fs.readFile("./buscar.html",(err, data)=>{
+        if(err){
+         return  res.status(400).send("buscar.html no encontrado");
+        }
+        var textDat = data.toString();
+        console.log(textDat);
+        res.send(textDat.replace(":endpoint:","http://" + req.headers.host + "/"));
+    });
+    
+}
+router.get("/buscar", devolverForm);
+router.get("/buscar.html", devolverForm);
 
 router.get("/:lan/:coleccion",(req,res)=>{
 
