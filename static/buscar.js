@@ -2,8 +2,19 @@
 
 
 var res = document.getElementById("resultado");
-      
 var xhr = new XMLHttpRequest;
+var environment ="development";
+var endpoint = "http://localhost:2001/"
+try{
+    port = process.env.PORT;
+    environment = process.env.NODE_ENV;
+    endpoint = `http://indesan.org:${port}/`
+} catch{
+
+}
+
+console.log(endpoint);
+
 xhr.onreadystatechange = procesarRespuesta;
 
 function query(){
@@ -15,7 +26,7 @@ function query(){
   if (document.getElementById("en").checked ) lan = "en";
   if (document.getElementById("fr").checked ) lan = "fr";
 
-  xhr.open('GET', "http://indesan.org:2001/"+ lan +"/" + col, true);
+  xhr.open('GET', endpoint + lan +"/" + col, true);
   xhr.send();
 
 }  
@@ -27,7 +38,7 @@ function create(){
     var fr_caption = document.getElementById("fr_caption").value;
     var en_caption = document.getElementById("en_caption").value;
 
-    xhr.open('POST', "http://indesan.org:2001/" + col, true);
+    xhr.open('POST', endpoint + col, true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.send(JSON.stringify({"imagen" : img,
                                 "es_caption" : es_caption,
