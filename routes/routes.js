@@ -101,7 +101,7 @@ function devolverForm(req,res){
          return  res.status(400).send("buscar.html no encontrado");
         }
         var textDat = data.toString();
-        console.log(textDat);
+        //console.log(textDat);
         res.send(textDat.replace(":endpoint:","http://" + req.headers.host + "/"));
     });
     
