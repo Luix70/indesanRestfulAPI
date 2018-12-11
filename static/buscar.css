@@ -1,12 +1,41 @@
 #addCollection {
            background-color: #ffdddd;
            padding:1em;
-           
-       }
+}
 
-       .visible{
-        visibility:visible;
-       }
-       .invisible{
-        visibility:hidden;
-       }
+.visible{
+visibility:visible;
+}
+
+.invisible{
+visibility:hidden;
+}
+
+.bigthumb{
+    position: relative;
+    width:100%;
+    text-align: center;
+
+    
+    
+}
+
+.__titulo{
+    font-family: "Lato", sans-serif;
+    font-size: 3rem;
+    font-weight: 500;
+    color: #ffdddd;
+    position: absolute;
+    top:50%;
+    transform:translateY(-50%);
+    -webkit-transform:translateY(-50%);
+    -moz-transform:translateY(-50%);
+    -ms-transform:translateY(-50%);
+    -o-transform:translateY(-50%);
+    left:0;
+    width:100%;
+    text-align: center;
+    margin:0;
+    padding: 0;
+}
+
