@@ -62,10 +62,6 @@ async function getColeccion( param, callback){
     
 }
 
-
-    
-
-
 async function putColeccion(coleccion, callback){
     await coleccion.save()
     .then(callback)
@@ -73,6 +69,14 @@ async function putColeccion(coleccion, callback){
         res.send("la coleccion que estas intentando agregar ya existe: <br>" + err)
     });
 }
+
+async function deleteColeccion(nombre, callback) {
+    const result= await Coleccion.deleteOne ({ mod: nombre});
+    //console.log(JSON.stringify(result))
+    callback(result);                   
+}
+
+module.exports.deleteColeccion = deleteColeccion;
 module.exports.putColeccion = putColeccion;
 module.exports.getColeccion = getColeccion;
 module.exports.getColecciones = getColecciones;

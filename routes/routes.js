@@ -18,13 +18,14 @@ const plantilla = `<div class="bigthumb">
                    <img src="/thumbs/:imagen:" alt=":titulo:">
                    <h1 class="__titulo">:saludo:</h1>
                    </div>
-                   <h3>Español</h3>
-                   <span>:es_caption:</span>
-                   <h3>Francés</h3>
-                   <span>:fr_caption:</span>
-                   <h3>Inglés</h3>
-                   <span>:en_caption:</span>`
-
+                   <div class="subtitulos">
+                    <h3>Español</h3>
+                    <span>:es_caption:</span>
+                    <h3>Francés</h3>
+                    <span>:fr_caption:</span>
+                    <h3>Inglés</h3>
+                    <span>:en_caption:</span>
+                   </div>` 
 // FUNCIONES AUXILIARES
 
 function saludar(idioma){
@@ -132,18 +133,39 @@ router.post("/:modelo",(req,res) =>{
 });   
 
 router.put("/:modelo",(req,res) =>{
-    //si el modelo no existe devolver 404
+    
 
-    //si existe, actualizarlo y devolver el objeto actualizado
+    
 
 });
 
 
 router.delete("/:modelo",(req,res) =>{
-    //si el modelo no existe devolver 404
+    const modelo = req.params.modelo.toLowerCase();
 
+    db.deleteColeccion(modelo,(result)=>{
+        
 
-    //si existe, borrarlo y devolver el objeto actualizado
+        if (!result.n){ //si no se ha eliminado nada el valor es 0
+            //si el modelo no existe devolver 404
+            return res.status(404).send(plantilla.replace(":saludo:", "NO ENCONTRADO : "  + modelo).
+            replace(":imagen:" , "").
+            replace(":titulo:", "ERROR").
+            replace(":es_caption:","No se ha encontrado la coleccion a eliminar").
+            replace(":fr_caption:","Collection pas trouvée").
+            replace(":en_caption:","Collection not found"))
+        } else {
+            //si existe, confirmar que se ha borrado
+            res.send(plantilla.replace(":saludo:", "ELIMINADO : "  + modelo).
+            replace(":imagen:" , "").
+            replace(":titulo:", "eliminado").
+            replace(":es_caption:","Coleccion Borrada").
+            replace(":fr_caption:","Collection effacée").
+            replace(":en_caption:","Deleted Collection"));
+
+        }
+        
+    });
 });
 
 module.exports = router

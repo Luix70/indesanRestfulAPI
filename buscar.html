@@ -12,29 +12,33 @@
     </script>
 </head>
 <body>
-  <h1>Consultar colecciones</h1>
-<div>
  
-
-
- <fieldset id = "langs">
-        <legend> Idioma:</legend>
-        <input type="radio"  name="lang" value="es" id = "es" >Español</option>
-        <input type="radio"  name="lang" value="fr" id = "fr" >Francés</option>
-        <input type="radio"  name="lang" value="en" id = "en">Inglés</option>
- </fieldset>  
-
- <br>
- Coleccion: <input type="text" id="coleccion" value="">
-
-  <input type="submit" value="Consultar" onclick="query()">
-
+<div class="zonaConsulta">
+    <h1>Consultar colecciones</h1>
+    Coleccion: <input type="text" id="coleccion" value="">
+    <input type="submit" value="Consultar" onclick="query()">
+    <fieldset id = "langs">
+          
+            <input type="radio"  name="lang" value="es" id = "es" >Español</option>
+            <input type="radio"  name="lang" value="fr" id = "fr" >Francés</option>
+            <input type="radio"  name="lang" value="en" id = "en">Inglés</option>
+    </fieldset>  
+    
 </div> 
 
 
 <div id = "resultado" >
-    
+
+
 </div >
+
+<div id="navigation" class = "invisible" >
+    <div id="btnContainer">
+        <a href="#" class="btnNav" onclick = "deleteColeccion()">Eliminar</a>
+        <a href="#" class="btnNav" onclick = "updateColeccion()">Modificar</a>
+    </div>
+
+</div>
 
 <div id = "addCollection" class = "invisible">
     <h2>Añadir Coleccion Nueva</h2>
