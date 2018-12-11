@@ -28,6 +28,7 @@ const plantilla = `<div class="bigthumb">
 // FUNCIONES AUXILIARES
 
 function saludar(idioma){
+    var saludo= "No hablo tu idioma, ";
     switch (idioma) {
         case "fr":  
                 saludo= "Bonjour, ";
@@ -40,9 +41,9 @@ function saludar(idioma){
         case "en":
                 saludo= "Hello, ";
             break;
-        default:
-                saludo= "No hablo tu idioma, ";
     }
+
+    return saludo;
 };
 
 function devolverForm(req,res){
@@ -89,7 +90,7 @@ router.get("/:lan/:coleccion",(req,res)=>{
     
             } else {
                 
-                var saludo = Saludar(req.params.lan.toLowerCase());
+                var saludo = saludar(req.params.lan.toLowerCase());
                 //console.log(resultado[0]);
                 res.send(
                     plantilla.replace(":saludo:", saludo + modelo).
