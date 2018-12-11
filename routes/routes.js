@@ -14,17 +14,17 @@ router.use(express.json());
 router.use(express.static("./static"));
 
 
-const plantilla = `<div class="bigthumb">
-                   <img src="/thumbs/:imagen:" alt=":titulo:">
+const plantilla = `<div class="thumbContainer">
+                   <img class="thumb" src="/thumbs/:imagen:" alt=":titulo:">
                    <h1 class="__titulo">:saludo:</h1>
                    </div>
                    <div class="subtitulos">
-                    <h3>Español</h3>
-                    <span>:es_caption:</span>
-                    <h3>Francés</h3>
-                    <span>:fr_caption:</span>
-                    <h3>Inglés</h3>
-                    <span>:en_caption:</span>
+                    <span class="lang_cap">Español: </span>
+                    <input type="text" id="coleccion" value=":es_caption:" class="lang_text">
+                    <span class="lang_cap">Francés: </span>
+                    <input type="text" id="coleccion" value=":fr_caption:" class="lang_text">
+                    <span class="lang_cap">Inglés: </span>
+                    <input type="text" id="coleccion" value=":en_caption:" class="lang_text">
                    </div>` 
 // FUNCIONES AUXILIARES
 
@@ -120,7 +120,7 @@ router.post("/:modelo",(req,res) =>{
         captions: { es: es_caption, fr: fr_caption, en: en_caption}
     });
 
-    db.putColeccion(coleccion, result =>{
+    db.addColeccion(coleccion, result =>{
         //console.log(result);
         res.send(plantilla.replace(":saludo:", "Añadido: "  + result.mod).
         replace(":imagen:" , result.thumbnail).
@@ -148,7 +148,7 @@ router.delete("/:modelo",(req,res) =>{
 
         if (!result.n){ //si no se ha eliminado nada el valor es 0
             //si el modelo no existe devolver 404
-            return res.status(404).send(plantilla.replace(":saludo:", "NO ENCONTRADO : "  + modelo).
+            return res.status(404).send(plantilla.replace(":saludo:", "NO EXISTE: "  + modelo).
             replace(":imagen:" , "").
             replace(":titulo:", "ERROR").
             replace(":es_caption:","No se ha encontrado la coleccion a eliminar").

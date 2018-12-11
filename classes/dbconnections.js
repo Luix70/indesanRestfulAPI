@@ -62,7 +62,7 @@ async function getColeccion( param, callback){
     
 }
 
-async function putColeccion(coleccion, callback){
+async function addColeccion(coleccion, callback){
     await coleccion.save()
     .then(callback)
     .catch(err =>{
@@ -77,7 +77,7 @@ async function deleteColeccion(nombre, callback) {
 }
 
 module.exports.deleteColeccion = deleteColeccion;
-module.exports.putColeccion = putColeccion;
+module.exports.addColeccion = addColeccion;
 module.exports.getColeccion = getColeccion;
 module.exports.getColecciones = getColecciones;
 module.exports.Coleccion = Coleccion;

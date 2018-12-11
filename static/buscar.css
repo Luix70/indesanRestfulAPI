@@ -1,13 +1,32 @@
-#addCollection {
+html{
+    font-family: "Lato", sans-serif;
+}
+
+#addCollection, #resultado {
            background-color: #ffdddd;
            padding:1em;
+           width:40rem;
+           text-align: center;
+           margin:1rem auto;
+
 }
 
 #langs{
-
-    margin:1rem auto 1rem auto;
+    
+    font-size: 0.8rem;
+    margin:1rem 1rem 1rem 1rem;
     width:30rem;
 
+}
+
+
+
+.subtitulos{
+    
+    width:30rem;
+   
+    margin: 1rem auto;
+    
 }
 
 .visible{
@@ -18,22 +37,24 @@ visibility:visible;
 visibility:hidden;
 }
 
-html{
-    font-family: "Lato", sans-serif;
-}
-.bigthumb, .subtitulos, .zonaConsulta{
+
+.zonaConsulta{
     position: relative;
-    width:100%;
+    width:35rem;
     text-align: center;
-   
-    margin:1rem;
+    margin:1rem auto;
+    
    
 }
 
-.bigthumn img{
-    width:"512px";
-     height:"512px"
+.thumbContainer{
+    position: relative;
+    width:35rem;
+    text-align: center;
+    margin:1rem auto;
+    min-height: 300px; 
 }
+
 
 .__titulo{
     
@@ -77,5 +98,22 @@ html{
     background-color: #fff;
     color:#222;
 
+}
+
+.lang_cap{
+    display:inline-block;
+    font-weight: bold;
+    width:5rem;
+    text-align: right; 
+    margin-right: 0.2rem;
+}
+
+.lang_text{
+    display:inline-block;
+    width:23rem;
+    border:0;
+    border-bottom: 2px solid #ddd;
+    text-align: left; 
+    padding:0 0.2rem;
 }
 
