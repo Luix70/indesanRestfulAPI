@@ -26,29 +26,56 @@ function deleteColeccion(){
     xhr.open('DELETE', endpoint + col, true);
     xhr.send();
 }
+function leerCampos(origen){
+    if (origen === "actual"){
+        var col = document.getElementById("coleccion").value.toLowerCase();
+        var img = document.getElementById("nombreImagen").innerHTML;
+        var _id = document.getElementById("_id").innerHTML;
+        var es_caption = document.getElementById("es_cap").value;
+        var fr_caption = document.getElementById("fr_cap").value;
+        var en_caption = document.getElementById("en_cap").value;
 
+    }
+
+
+    if (origen === "nuevo"){
+        var col = document.getElementById("nuevaColeccion").value.toLowerCase();
+        var img = document.getElementById("nuevoThumb").value;
+        var _id = "?";
+        var es_caption = document.getElementById("es_caption").value;
+        var fr_caption = document.getElementById("fr_caption").value;
+        var en_caption = document.getElementById("en_caption").value;
+
+    }
+
+    return JSON.stringify({     "mod":col,
+                                "_id": _id,
+                                "imagen": img,
+                                "es_caption" : es_caption,
+                                "fr_caption" : fr_caption,
+                                "en_caption" : en_caption});
+
+
+}
 
 
 function updateColeccion(){
 
-    console.log("actualizamos la coleccion");
+    var data=leerCampos("actual");
+
+    xhr.open('PUT', endpoint + col, true);
+    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+    //console.log(data);                            
+    xhr.send(data); 
 }
 
 
 
 function create(){
-    var col = document.getElementById("nuevaColeccion").value.toLowerCase();
-    var img = document.getElementById("nuevoThumb").value;
-    var es_caption = document.getElementById("es_caption").value;
-    var fr_caption = document.getElementById("fr_caption").value;
-    var en_caption = document.getElementById("en_caption").value;
-
+    var data = leerCampos("nuevo");
     xhr.open('POST', endpoint + col, true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-    xhr.send(JSON.stringify({"imagen" : img,
-                                "es_caption" : es_caption,
-                                "fr_caption" : fr_caption,
-                                "en_caption" : en_caption}));   
+    xhr.send(data);   
 }
 
 

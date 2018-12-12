@@ -16,15 +16,17 @@ router.use(express.static("./static"));
 
 const plantilla = `<div class="thumbContainer">
                    <img class="thumb" src="/thumbs/:imagen:" alt=":titulo:">
+                   <span id="nombreImagen" class="invisible">:imagen:</span>
+                   <span id="_id" class="invisible">:_id:</span>
                    <h1 class="__titulo">:saludo:</h1>
                    </div>
                    <div class="subtitulos">
                     <span class="lang_cap">Español: </span>
-                    <input type="text" id="coleccion" value=":es_caption:" class="lang_text">
+                    <input type="text" id="es_cap" value=":es_caption:" class="lang_text">
                     <span class="lang_cap">Francés: </span>
-                    <input type="text" id="coleccion" value=":fr_caption:" class="lang_text">
+                    <input type="text" id="fr_cap" value=":fr_caption:" class="lang_text">
                     <span class="lang_cap">Inglés: </span>
-                    <input type="text" id="coleccion" value=":en_caption:" class="lang_text">
+                    <input type="text" id="en_cap" value=":en_caption:" class="lang_text">
                    </div>` 
 // FUNCIONES AUXILIARES
 
@@ -95,8 +97,9 @@ router.get("/:lan/:coleccion",(req,res)=>{
                 //console.log(resultado[0]);
                 res.send(
                     plantilla.replace(":saludo:", saludo + modelo).
-                            replace(":imagen:" , resultado[0].thumbnail).
-                            replace(":titulo:",resultado[0].thumbnail).
+                            replace(/:imagen:/g , resultado[0].thumbnail).
+                            replace(/:titulo:/g,resultado[0].thumbnail,).
+                            replace(":_id:",resultado[0]._id,).
                             replace(":es_caption:",resultado[0].captions.es).
                             replace(":fr_caption:",resultado[0].captions.fr).
                             replace(":en_caption:",resultado[0].captions.en)
@@ -123,8 +126,9 @@ router.post("/:modelo",(req,res) =>{
     db.addColeccion(coleccion, result =>{
         //console.log(result);
         res.send(plantilla.replace(":saludo:", "Añadido: "  + result.mod).
-        replace(":imagen:" , result.thumbnail).
-        replace(":titulo:", result.thumbnail).
+        replace(/:imagen:/g , result.thumbnail).
+        replace(/:titulo:/g, result.thumbnail).
+        replace(":_id:",resultado[0]._id,).
         replace(":es_caption:",result.captions.es).
         replace(":fr_caption:",result.captions.fr).
         replace(":en_caption:",result.captions.en));})
@@ -134,7 +138,25 @@ router.post("/:modelo",(req,res) =>{
 
 router.put("/:modelo",(req,res) =>{
     
+    const modelo = req.params.modelo.toLowerCase();
+    const img = req.body.imagen;
+    const es_caption = req.body.es_caption || "----------";
+    const fr_caption = req.body.fr_caption || "----------";
+    const en_caption = req.body.en_caption || "----------";
+    const coleccion = new db.Coleccion({
+        mod: modelo,
+        thumbnail : img,
+        captions: { es: es_caption, fr: fr_caption, en: en_caption}
+    });
 
+    db.updateColeccion(coleccion, result =>{
+        //console.log(result);
+        res.send(plantilla.replace(":saludo:", "Modificado: "  + result.mod).
+        replace(":imagen:" , result.thumbnail).
+        replace(":titulo:", result.thumbnail).
+        replace(":es_caption:",result.captions.es).
+        replace(":fr_caption:",result.captions.fr).
+        replace(":en_caption:",result.captions.en));})
     
 
 });
