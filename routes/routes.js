@@ -13,22 +13,8 @@ const fs = require("fs");
 router.use(express.json());
 router.use(express.static("./static"));
 
-
-const plantilla = `<div class="thumbContainer">
-                   <img class="thumb" src="/thumbs/:imagen:" alt=":titulo:">
-                   <span id="nombreImagen" class="invisible">:imagen:</span>
-                   <span id="_id" class="invisible">:_id:</span>
-                   <h1 class="__titulo">:saludo:</h1>
-                   </div>
-                   <div class="subtitulos">
-                    <span class="lang_cap">Español: </span>
-                    <input type="text" id="es_cap" value=":es_caption:" class="lang_text">
-                    <span class="lang_cap">Francés: </span>
-                    <input type="text" id="fr_cap" value=":fr_caption:" class="lang_text">
-                    <span class="lang_cap">Inglés: </span>
-                    <input type="text" id="en_cap" value=":en_caption:" class="lang_text">
-                   </div>` 
 // FUNCIONES AUXILIARES
+fs.readFile("./views/plantillaColeccion.html",(err, data)=>{global.plantilla = data.toString()});
 
 function saludar(idioma){
     var saludo= "No hablo tu idioma, ";
@@ -50,7 +36,7 @@ function saludar(idioma){
 };
 
 function devolverForm(req,res){
-    fs.readFile("./buscar.html",(err, data)=>{
+    fs.readFile("./views/buscar.html",(err, data)=>{
         if(err){
          return  res.status(400).send("buscar.html no encontrado");
         }
@@ -61,7 +47,15 @@ function devolverForm(req,res){
     
 }
 
-
+function mergePlantilla(result , texto){
+    return plantilla.replace(":saludo:",texto).
+            replace(/:imagen:/g , result.thumbnail).
+            replace(/:titulo:/g, result.thumbnail).
+            replace(":_id:",result._id,).
+            replace(":es_caption:",result.captions.es).
+            replace(":fr_caption:",result.captions.fr).
+            replace(":en_caption:",result.captions.en)
+}
 
 //RUTAS
 
@@ -95,25 +89,20 @@ router.get("/:lan/:coleccion",(req,res)=>{
                 
                 var saludo = saludar(req.params.lan.toLowerCase());
                 //console.log(resultado[0]);
-                res.send(
-                    plantilla.replace(":saludo:", saludo + modelo).
-                            replace(/:imagen:/g , resultado[0].thumbnail).
-                            replace(/:titulo:/g,resultado[0].thumbnail,).
-                            replace(":_id:",resultado[0]._id,).
-                            replace(":es_caption:",resultado[0].captions.es).
-                            replace(":fr_caption:",resultado[0].captions.fr).
-                            replace(":en_caption:",resultado[0].captions.en)
+                res.send( 
+
+                    mergePlantilla(resultado[0] , saludo + modelo )
+                  
                 ); 
             } 
         })
 });
 
-router.post("/:modelo",(req,res) =>{
 
-
-
-    const modelo = req.params.modelo.toLowerCase();
-    const img = req.body.imagen;
+function recuperarColeccion(req){
+    const modelo = req.body.col.toLowerCase();
+    const img = req.body.thumbnail;
+    const _id = req.body._id;
     const es_caption = req.body.es_caption || "----------";
     const fr_caption = req.body.fr_caption || "----------";
     const en_caption = req.body.en_caption || "----------";
@@ -123,40 +112,29 @@ router.post("/:modelo",(req,res) =>{
         captions: { es: es_caption, fr: fr_caption, en: en_caption}
     });
 
+    return coleccion;
+}
+router.post("/save",(req,res) =>{
+
+    const coleccion = recuperarColeccion(req);
+
     db.addColeccion(coleccion, result =>{
         //console.log(result);
-        res.send(plantilla.replace(":saludo:", "Añadido: "  + result.mod).
-        replace(/:imagen:/g , result.thumbnail).
-        replace(/:titulo:/g, result.thumbnail).
-        replace(":_id:",resultado[0]._id,).
-        replace(":es_caption:",result.captions.es).
-        replace(":fr_caption:",result.captions.fr).
-        replace(":en_caption:",result.captions.en));})
+        res.send( mergePlantilla(result, "Añadido: "  + result.mod) );
+    })
    
 
 });   
 
-router.put("/:modelo",(req,res) =>{
+router.put("/update",(req,res) =>{
     
-    const modelo = req.params.modelo.toLowerCase();
-    const img = req.body.imagen;
-    const es_caption = req.body.es_caption || "----------";
-    const fr_caption = req.body.fr_caption || "----------";
-    const en_caption = req.body.en_caption || "----------";
-    const coleccion = new db.Coleccion({
-        mod: modelo,
-        thumbnail : img,
-        captions: { es: es_caption, fr: fr_caption, en: en_caption}
-    });
+    const coleccion = recuperarColeccion(req);
 
+    console.log(coleccion);
     db.updateColeccion(coleccion, result =>{
         //console.log(result);
-        res.send(plantilla.replace(":saludo:", "Modificado: "  + result.mod).
-        replace(":imagen:" , result.thumbnail).
-        replace(":titulo:", result.thumbnail).
-        replace(":es_caption:",result.captions.es).
-        replace(":fr_caption:",result.captions.fr).
-        replace(":en_caption:",result.captions.en));})
+        res.send(mergePlantilla(result, "Modificado: "  + result.mod));
+    })
     
 
 });
@@ -170,20 +148,31 @@ router.delete("/:modelo",(req,res) =>{
 
         if (!result.n){ //si no se ha eliminado nada el valor es 0
             //si el modelo no existe devolver 404
-            return res.status(404).send(plantilla.replace(":saludo:", "NO EXISTE: "  + modelo).
-            replace(":imagen:" , "").
-            replace(":titulo:", "ERROR").
-            replace(":es_caption:","No se ha encontrado la coleccion a eliminar").
-            replace(":fr_caption:","Collection pas trouvée").
-            replace(":en_caption:","Collection not found"))
+            var resultado = {
+                thumbnail : "",
+                _id:"" ,
+                mod: "ERROR",
+                captions:{
+                    es:"No se ha encontrado la coleccion a eliminar",
+                    en:"Collection not found",
+                    fr: "Collection pas trouvée"
+                }
+            }
+            return res.status(404).send(mergePlantilla(resultado ,  "NO EXISTE: "  + modelo))
+
         } else {
             //si existe, confirmar que se ha borrado
-            res.send(plantilla.replace(":saludo:", "ELIMINADO : "  + modelo).
-            replace(":imagen:" , "").
-            replace(":titulo:", "eliminado").
-            replace(":es_caption:","Coleccion Borrada").
-            replace(":fr_caption:","Collection effacée").
-            replace(":en_caption:","Deleted Collection"));
+            var resultado = {
+                thumbnail : "",
+                _id:"" ,
+                mod: "ELIMINADO",
+                captions:{
+                    es:"Coleccion Borrada",
+                    en:"Deleted Collection",
+                    fr:"Collection effacée"
+                }
+            }
+            res.send(mergePlantilla(resultado , "ELIMINADO : "  + modelo));
 
         }
         

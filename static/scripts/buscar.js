@@ -27,9 +27,10 @@ function deleteColeccion(){
     xhr.send();
 }
 function leerCampos(origen){
+
     if (origen === "actual"){
         var col = document.getElementById("coleccion").value.toLowerCase();
-        var img = document.getElementById("nombreImagen").innerHTML;
+        var thumbnail = document.getElementById("nombreImagen").innerHTML;
         var _id = document.getElementById("_id").innerHTML;
         var es_caption = document.getElementById("es_cap").value;
         var fr_caption = document.getElementById("fr_cap").value;
@@ -40,7 +41,7 @@ function leerCampos(origen){
 
     if (origen === "nuevo"){
         var col = document.getElementById("nuevaColeccion").value.toLowerCase();
-        var img = document.getElementById("nuevoThumb").value;
+        var thumbnail = document.getElementById("nuevoThumb").value;
         var _id = "?";
         var es_caption = document.getElementById("es_caption").value;
         var fr_caption = document.getElementById("fr_caption").value;
@@ -48,13 +49,14 @@ function leerCampos(origen){
 
     }
 
-    return JSON.stringify({     "mod":col,
-                                "_id": _id,
-                                "imagen": img,
-                                "es_caption" : es_caption,
-                                "fr_caption" : fr_caption,
-                                "en_caption" : en_caption});
-
+    var data = JSON.stringify({     "col": col,
+                                    "_id": _id,
+                                    "thumbnail": thumbnail,
+                                    "es_caption" : es_caption,
+                                    "fr_caption" : fr_caption,
+                                    "en_caption" : en_caption});
+    //console.log(data);
+    return  data;
 
 }
 
@@ -63,9 +65,9 @@ function updateColeccion(){
 
     var data=leerCampos("actual");
 
-    xhr.open('PUT', endpoint + col, true);
+    xhr.open('PUT', endpoint +"update" , true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-    //console.log(data);                            
+    console.log(data);                            
     xhr.send(data); 
 }
 
@@ -73,7 +75,7 @@ function updateColeccion(){
 
 function create(){
     var data = leerCampos("nuevo");
-    xhr.open('POST', endpoint + col, true);
+    xhr.open('POST', endpoint + "save", true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.send(data);   
 }

@@ -76,32 +76,31 @@ async function addColeccion(coleccion, callback){
 
 async function deleteColeccion(nombre, callback) {
     const result= await Coleccion.deleteOne ({ mod: nombre});
-    //console.log(JSON.stringify(result))
+    //console.log(JSON.stringify(result
     callback(result);                   
 }
 
 
 function updateColeccion(coleccion, callback) {
     //buscamos por modelo en primer lugar
-    Coleccion.findOne({_id: "ObjectId(" + coleccion._id + ")"}, (err , result) =>{
-        console.log(result);
+    Coleccion.findOne({_id:  coleccion._id}, (err , result) =>{
+        //console.log(result);
         if(!result) {
-            return console.log("error localizando " + coleccion._id + " " + err);
+            return err;
         }
 
         result.set({
             captions:coleccion.captions,
-            mod: colleccion.mod,
+            mod: coleccion.mod,
             thumbnail: coleccion.thumbnail,
             activa: coleccion.activa
         })
     
         result.save();
         
-        callback(result)
+        callback(result);
 
     });
-
       
 }
 

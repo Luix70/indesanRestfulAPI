@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="./buscar.css">
+    <link rel="stylesheet" href="./styles/buscar.css">
     <script>
         var endpoint = ":endpoint:"; //Se establece en el servidor antes de devolver este archivo estatico
         //console.log(endpoint)
@@ -50,7 +50,6 @@
 <div id = "addCollection" class = "invisible">
     <h2>Añadir Coleccion Nueva</h2>
     Coleccion:  <input type="text" id="nuevaColeccion" value="">  
-   
     Imagen: <input type="text" id="nuevoThumb" value="">  
     <br>
     Español: <input type="text" id="es_caption" value="" > 
@@ -59,7 +58,6 @@
     <br>
     Inglés: <input type="text" id="en_caption" value="" > 
     <br>
-
     <input type="submit" value="Añadir" onclick="create()">
     <input type="submit" value="Cancelar" onclick="ocultar()">
 
@@ -67,6 +65,6 @@
 
 </body>
 
-<script src="buscar.js"></script>
+<script src="../scripts/buscar.js"></script>
 
 </html>
