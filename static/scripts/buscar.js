@@ -7,29 +7,10 @@ var xhr = new XMLHttpRequest;
 
 xhr.onreadystatechange = procesarRespuesta;
 
-function query(){
-
-  var col = document.getElementById("coleccion").value;
-
-  //averiguemos el idioma
-  var   lan ="es"; //default
-  if (document.getElementById("en").checked ) lan = "en";
-  if (document.getElementById("fr").checked ) lan = "fr";
-
-  xhr.open('GET', endpoint + lan +"/" + col, true);
-  xhr.send();
-
-}  
-
-function deleteColeccion(){
-    var col = document.getElementById("coleccion").value;
-    xhr.open('DELETE', endpoint + col, true);
-    xhr.send();
-}
 function leerCampos(origen){
 
     if (origen === "actual"){
-        var col = document.getElementById("coleccion").value.toLowerCase();
+        var mod = document.getElementById("coleccion").value.toLowerCase();
         var thumbnail = document.getElementById("nombreImagen").innerHTML;
         var _id = document.getElementById("_id").innerHTML;
         var es_caption = document.getElementById("es_cap").value;
@@ -40,7 +21,7 @@ function leerCampos(origen){
 
 
     if (origen === "nuevo"){
-        var col = document.getElementById("nuevaColeccion").value.toLowerCase();
+        var mod = document.getElementById("nuevaColeccion").value.toLowerCase();
         var thumbnail = document.getElementById("nuevoThumb").value;
         var _id = "?";
         var es_caption = document.getElementById("es_caption").value;
@@ -49,25 +30,45 @@ function leerCampos(origen){
 
     }
 
-    var data = JSON.stringify({     "col": col,
+    var data = JSON.stringify({     "mod": mod,
                                     "_id": _id,
                                     "thumbnail": thumbnail,
                                     "es_caption" : es_caption,
                                     "fr_caption" : fr_caption,
                                     "en_caption" : en_caption});
-    //console.log(data);
+    
     return  data;
 
+}
+
+
+function query(){
+
+  var mod = document.getElementById("coleccion").value;
+
+  //averiguemos el idioma
+  var   lan ="es"; //default
+  if (document.getElementById("en").checked ) lan = "en";
+  if (document.getElementById("fr").checked ) lan = "fr";
+
+  xhr.open('GET', endpoint + lan +"/" + mod, true);
+  xhr.send();
+
+}  
+
+function deleteColeccion(){
+    var  mod = document.getElementById("coleccion").value;
+    xhr.open('DELETE', endpoint + mod, true);
+    xhr.send();
 }
 
 
 function updateColeccion(){
 
     var data=leerCampos("actual");
-
+    //console.log("Enviado por buscar.js: " + data);    
     xhr.open('PUT', endpoint +"update" , true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-    console.log(data);                            
     xhr.send(data); 
 }
 

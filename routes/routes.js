@@ -41,18 +41,19 @@ function devolverForm(req,res){
          return  res.status(400).send("buscar.html no encontrado");
         }
         var textDat = data.toString();
-        //console.log(textDat);
+       
         res.send(textDat.replace(":endpoint:","http://" + req.headers.host + "/"));
     });
     
 }
 
 function mergePlantilla(result , texto){
+    
     return plantilla.replace(":saludo:",texto).
             replace(/:imagen:/g , result.thumbnail).
             replace(/:titulo:/g, result.thumbnail).
             replace(":_id:",result._id,).
-            replace(":es_caption:",result.captions.es).
+            replace(":es_caption:",result.captions.es ).
             replace(":fr_caption:",result.captions.fr).
             replace(":en_caption:",result.captions.en)
 }
@@ -79,16 +80,16 @@ router.get("/:lan/:coleccion",(req,res)=>{
        
         //consultamos la BD por el modelo requerido
         db.getColeccion(modelo , (resultado) =>{
-            //console.log(resultado);
+            
             if (resultado.length == 0){
 
                 res.status(404).send("<h1>No encontrado / pas trouvé / not found / nicht gefunden </h1> ");
-                //res.status(404).json(dir);
+               
     
             } else {
                 
                 var saludo = saludar(req.params.lan.toLowerCase());
-                //console.log(resultado[0]);
+                
                 res.send( 
 
                     mergePlantilla(resultado[0] , saludo + modelo )
@@ -100,26 +101,30 @@ router.get("/:lan/:coleccion",(req,res)=>{
 
 
 function recuperarColeccion(req){
-    const modelo = req.body.col.toLowerCase();
-    const img = req.body.thumbnail;
+    const mod = req.body.mod.toLowerCase();
+    const thumbnail = req.body.thumbnail;
     const _id = req.body._id;
     const es_caption = req.body.es_caption || "----------";
     const fr_caption = req.body.fr_caption || "----------";
     const en_caption = req.body.en_caption || "----------";
     const coleccion = new db.Coleccion({
-        mod: modelo,
-        thumbnail : img,
+        mod: mod,
+        thumbnail : thumbnail,
         captions: { es: es_caption, fr: fr_caption, en: en_caption}
     });
-
+    if (_id !="?") {
+        coleccion._id=_id;
+        
+    }
+    
     return coleccion;
 }
 router.post("/save",(req,res) =>{
 
     const coleccion = recuperarColeccion(req);
-
+   
     db.addColeccion(coleccion, result =>{
-        //console.log(result);
+ 
         res.send( mergePlantilla(result, "Añadido: "  + result.mod) );
     })
    
@@ -130,9 +135,10 @@ router.put("/update",(req,res) =>{
     
     const coleccion = recuperarColeccion(req);
 
-    console.log(coleccion);
+  
     db.updateColeccion(coleccion, result =>{
-        //console.log(result);
+        
+    
         res.send(mergePlantilla(result, "Modificado: "  + result.mod));
     })
     

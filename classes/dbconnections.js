@@ -24,10 +24,9 @@ const captionsSchema = new mongoose.Schema({
 
 
 const colSchema = new mongoose.Schema({
-    
     mod : {type: String, required : true, unique: true},
     thumbnail : {type: String, default : "Nothumb_tn"} ,
-    activa:{ type: Boolean, default:true},
+    activa:{ type: Boolean, default: true},
     captions: captionsSchema
 });
 
@@ -67,16 +66,18 @@ async function getColeccion( param, callback){
 }
 
 async function addColeccion(coleccion, callback){
+    //console.log("Recibido por addColeccion" + coleccion);
+ 
     await coleccion.save()
     .then(callback)
     .catch(err =>{
-        res.send("la coleccion que estas intentando agregar ya existe: <br>" + err)
+        callback(new Error("Error al añadir la coleccion <br>" + err),{});
     });
 }
 
 async function deleteColeccion(nombre, callback) {
     const result= await Coleccion.deleteOne ({ mod: nombre});
-    //console.log(JSON.stringify(result
+    
     callback(result);                   
 }
 
@@ -84,8 +85,9 @@ async function deleteColeccion(nombre, callback) {
 function updateColeccion(coleccion, callback) {
     //buscamos por modelo en primer lugar
     Coleccion.findOne({_id:  coleccion._id}, (err , result) =>{
-        //console.log(result);
+
         if(!result) {
+            console.log(err);
             return err;
         }
 
