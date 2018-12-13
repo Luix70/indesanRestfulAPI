@@ -1,0 +1,10 @@
+{
+    "JWTKey":"",
+    "PORT":"",
+    "DB_SERVER":"",
+    "DB_PROTOCOL":"",
+    "DB_BASE":"",
+    "DB_USER":"",
+    "DB_PASS":"",
+    "NODE_ENV":""
+}

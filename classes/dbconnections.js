@@ -2,12 +2,12 @@
 // TO WORK WITH
 
 const mongoose = require("mongoose");
-
-const mongoProtocol = process.env.DB_PROTOCOL ; // Reside en Atlas
-const mongoServer = process.env.DB_SERVER;
-const mongoDB = process.env.DB_BASE ;
-const mongoUser= process.env.DB_USER;
-const mongoPassword  = process.env.DB_PASS;
+const config = require("config");
+const mongoProtocol = config.get("DB_PROTOCOL") ; // Reside en Atlas
+const mongoServer = config.get("DB_SERVER") ;
+const mongoDB = config.get("DB_BASE") ;
+const mongoUser= config.get("DB_USER");
+const mongoPassword  = config.get("DB_PASS");
 
 const mongoConectionString = `${mongoProtocol}://${mongoUser}:${mongoPassword}@${mongoServer}/${mongoDB}`;
 
