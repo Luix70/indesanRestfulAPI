@@ -51,14 +51,14 @@ function query(){
   if (document.getElementById("en").checked ) lan = "en";
   if (document.getElementById("fr").checked ) lan = "fr";
 
-  xhr.open('GET', endpoint + lan +"/" + mod, true);
+  xhr.open('GET', endpoint + "colecciones/" + lan +"/" + mod, true);
   xhr.send();
 
 }  
 
 function deleteColeccion(){
     var  mod = document.getElementById("coleccion").value;
-    xhr.open('DELETE', endpoint + mod, true);
+    xhr.open('DELETE', endpoint + "colecciones/" + mod, true);
     xhr.send();
 }
 
@@ -67,7 +67,7 @@ function updateColeccion(){
 
     var data=leerCampos("actual");
     //console.log("Enviado por buscar.js: " + data);    
-    xhr.open('PUT', endpoint +"update" , true);
+    xhr.open('PUT', endpoint + "colecciones/update" , true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.send(data); 
 }
@@ -76,7 +76,7 @@ function updateColeccion(){
 
 function create(){
     var data = leerCampos("nuevo");
-    xhr.open('POST', endpoint + "save", true);
+    xhr.open('POST', endpoint + "colecciones/save", true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.send(data);   
 }

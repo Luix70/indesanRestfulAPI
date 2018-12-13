@@ -9,7 +9,7 @@ const express=require("express");
 const router = express.Router();
 const db = require("../classes/dbconnections.js");
 const fs = require("fs");
-router.use(express.static("./static"));
+
 
 // FUNCIONES AUXILIARES
 fs.readFile("./views/plantillaColeccion.html",(err, data)=>{global.plantilla = data.toString()});
@@ -113,8 +113,7 @@ function recuperarColeccion(req){
     });
     if (_id !="?") {
         coleccion._id=_id;
-        
-    }
+        }
     
     return coleccion;
 }

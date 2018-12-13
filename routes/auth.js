@@ -8,10 +8,6 @@ const express=require("express");
 const router = express.Router();
 const _ = require("lodash"); //utiliades
 const bcrypt=require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const myJWTkey = process.env.JWTKey;
-const config= require("config");
-
 
 
 router.post("/", async (req , res) => {
@@ -34,7 +30,8 @@ router.post("/", async (req , res) => {
      //we give no clues on what went wrong
 
     //let's generate a JSON Web Token with some payload
-    const token= jwt.sign({_id: user._id, name: user.name, email: user.email}, config.get("JWTKey") );
+    const token= user.generateWT();
+    
     
     res.send(token);
 

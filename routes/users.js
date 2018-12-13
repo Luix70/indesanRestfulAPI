@@ -4,13 +4,25 @@ const express=require("express");
 const router = express.Router();
 const _ = require("lodash"); //utiliades
 const bcrypt=require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const config = require("config");
+const auth_mw = require("../middleware/auth_mw")
 
-router.get("/", async (req, res)=>{//devuelve todos los usuarios de la base de datos
+router.get("/", auth_mw, async (req, res)=>{//devuelve todos los usuarios de la base de datos
     const users = await User.find().sort('name');
     res.send(users);
 });
+
+
+
+router.get("/me" , auth_mw, async function(req, res) {
+
+    //console.log("Buscamos informacion del usuario: " + req.currentUser._id);
+    const user = await User.findById( req.currentUser._id);
+    
+    res.send(_.pick(user,["name" , "email"]));
+
+});
+
 
 router.post("/", async (req , res) => {
     //validamos  con joi el usuario que nos viene en el body
@@ -43,7 +55,7 @@ router.post("/", async (req , res) => {
     // We've succesfully added a new user. Now we are going to create a token to 
     // return it in the  header of the response, so the user can use it from now on
 
-    const token= jwt.sign({_id: user._id, name: user.name, email: user.email}, config.get("JWTKey") );
+    const token= user.generateWT();
     
     //'no queremos mostrar la contraseña'
     res.header("x-auth-token",token).send(_.pick(user,["_id", "name", "email"]));

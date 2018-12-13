@@ -1,5 +1,7 @@
-var mongoose = require("mongoose")
-var Joi = require("joi"); //para validacion de datos de entrada
+const mongoose = require("mongoose")
+const Joi = require("joi"); //para validacion de datos de entrada
+const jwt = require("jsonwebtoken");
+const config= require("config");
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -23,7 +25,11 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-
+userSchema.methods.generateWT = function(){
+    return jwt.sign({_id: this._id, name: this.name, email: this.email}, config.get("JWTKey") );
+    //'this' will be the instance when created
+    // DO NOT USE AN ARROW FUNCTION: WE'D LOSE THE REFERENCE TO  context 'this'
+};
 const User = mongoose.model("usuarios" , userSchema);
 
 function validateUser(user){
@@ -38,3 +44,4 @@ function validateUser(user){
 
 module.exports.User = User;
 module.exports.validate = validateUser;
+// We don't have to export generateWT, because it's part of the user's "prototype"

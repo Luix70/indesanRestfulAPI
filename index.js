@@ -2,8 +2,9 @@ const express=require("express");
 const app = express();
 
 const auth = require("./routes/auth");
-const routes = require("./routes/routes.js");
+const colecciones = require("./routes/colecciones.js");
 const users = require("./routes/users.js");
+
 const cors = require("cors");
 const config= require("config");
 
@@ -20,10 +21,10 @@ if(!config.get("JWTKey")){
 
 app.use(express.json());
 app.use(cors());
-app.use("/", routes);
+app.use("/colecciones", colecciones);
 app.use("/users", users);
 app.use("/auth",auth);
-
+app.use(express.static("./static"));
 
 var port = config.get("PORT") || 3000;
 //si escucha en el puerto 3000 es por que no ha podido 
