@@ -1,7 +1,7 @@
 var mongoose = require("mongoose")
 var Joi = require("joi"); //para validacion de datos de entrada
 
-const User = mongoose.model("usuarios" , new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name:{
         type : String,
         required : true,
@@ -21,7 +21,10 @@ const User = mongoose.model("usuarios" , new mongoose.Schema({
         minlength : 5,
         maxlength: 1024 // se van a almacenar hasheadas
     }
-}));
+});
+
+
+const User = mongoose.model("usuarios" , userSchema);
 
 function validateUser(user){
     const schema  = {

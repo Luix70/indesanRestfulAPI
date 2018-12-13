@@ -4,7 +4,8 @@ const express=require("express");
 const router = express.Router();
 const _ = require("lodash"); //utiliades
 const bcrypt=require("bcryptjs");
-
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
 router.get("/", async (req, res)=>{//devuelve todos los usuarios de la base de datos
     const users = await User.find().sort('name');
@@ -35,13 +36,17 @@ router.post("/", async (req , res) => {
     // de introducir datos no deseados en nuestra base de datos
 
     //antes de guardar los cambios hasheamos las contraseñas con el modulo bcrypt
-    const salt  = await bcrypt.genSalt(5);
+    const salt  = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password,salt);
     user = await user.save();
 
-    //'no queremos mostrar la contraseña'
+    // We've succesfully added a new user. Now we are going to create a token to 
+    // return it in the  header of the response, so the user can use it from now on
+
+    const token= jwt.sign({_id: user._id, name: user.name, email: user.email}, config.get("JWTKey") );
     
-    res.send(_.pick(user,["_id", "name", "email"]));
+    //'no queremos mostrar la contraseña'
+    res.header("x-auth-token",token).send(_.pick(user,["_id", "name", "email"]));
 
 });
 
