@@ -12,7 +12,6 @@ const config= require("config");
 //especially those required for security
 //if they don't exist, we shall abort the execution
 
-
 if(!config.get("JWTKey")){
      console.error("FATAL ERROR: No JWTKey");
      process.exit(1);

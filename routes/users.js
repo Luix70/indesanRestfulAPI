@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const express=require("express");
 const router = express.Router();
 const _ = require("lodash"); //utiliades
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs");
 
 
 router.get("/", async (req, res)=>{//devuelve todos los usuarios de la base de datos
