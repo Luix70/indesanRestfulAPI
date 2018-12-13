@@ -57,6 +57,7 @@ function mergePlantilla(result , texto){
             replace(":es_caption:",result.captions.es ).
             replace(":fr_caption:",result.captions.fr).
             replace(":en_caption:",result.captions.en)
+            
 }
 
 //RUTAS

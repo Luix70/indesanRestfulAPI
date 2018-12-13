@@ -88,8 +88,8 @@ function procesarRespuesta(e){
     var nav=document.getElementById("navigation");
 
     if (xhr.readyState == 4 && xhr.status == 200) {
-        //todo ha ido
-        res.innerHTML= xhr.response;
+        //todo ha ido bien
+        res.innerHTML= xhr.response.replace(/:endpoint:/g, endpoint);
 
         intro.classList.remove("visible");
         intro.classList.add("invisible");
