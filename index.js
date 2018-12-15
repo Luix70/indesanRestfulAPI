@@ -33,8 +33,8 @@ var sPort = config.get("sPORT") || 5000;
 //leer las variables de entorno
 
 var httpsOptions={
-    key: fs.readFileSync("./https/key.pem"),
-    cert:  fs.readFileSync("./https/cert.pem")
+    key: fs.readFileSync("./https/key_io.pem"),
+    cert:  fs.readFileSync("./https/cert_io.pem")
 }
 https.createServer(httpsOptions , app).listen(sPort,()=>{
     console.log(`Escuchando (https) en el puerto: ${sPort}`)
