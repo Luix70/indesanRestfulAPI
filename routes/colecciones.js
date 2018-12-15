@@ -39,8 +39,9 @@ function devolverForm(req,res){
          return  res.status(400).send("buscar.html no encontrado");
         }
         var textDat = data.toString();
-       
-        res.send(textDat.replace(":endpoint:","http://" + req.headers.host + "/"));
+        //req.protocol: http or https
+        //req.headers.host: localhost:2001, por ejemplo
+        res.send(textDat.replace(/:endpoint:/g, req.protocol + "://" + req.headers.host + "/"));
     });
     
 }

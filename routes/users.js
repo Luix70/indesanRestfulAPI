@@ -7,6 +7,7 @@ const bcrypt=require("bcryptjs");
 const config = require("config");
 const auth_mw = require("../middleware/auth_mw")
 
+
 router.get("/", auth_mw, async (req, res)=>{//devuelve todos los usuarios de la base de datos
     const users = await User.find().sort('name');
     res.send(users);

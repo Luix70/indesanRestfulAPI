@@ -4,7 +4,8 @@ const app = express();
 const auth = require("./routes/auth");
 const colecciones = require("./routes/colecciones.js");
 const users = require("./routes/users.js");
-
+const fs=require("fs");
+const https= require("https");
 const cors = require("cors");
 const config= require("config");
 
@@ -27,10 +28,18 @@ app.use("/auth",auth);
 app.use(express.static("./static"));
 
 var port = config.get("PORT") || 3000;
-//si escucha en el puerto 3000 es por que no ha podido 
+var sPort = config.get("sPORT") || 5000;
+//si escucha en el puerto 3000 / 5000 es por que no ha podido 
 //leer las variables de entorno
 
+var httpsOptions={
+    key: fs.readFileSync("./https/key.pem"),
+    cert:  fs.readFileSync("./https/cert.pem")
+}
+https.createServer(httpsOptions , app).listen(sPort,()=>{
+    console.log(`Escuchando (https) en el puerto: ${sPort}`)
+})
 
 app.listen(port, ()=>{
-     console.log(`Escuchando en el puerto: ${port}`)
+     console.log(`Escuchando (http) en el puerto: ${port}`)
 });
