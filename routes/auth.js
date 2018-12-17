@@ -1,3 +1,6 @@
+//   PASSWORD AUTHENTICATION
+
+
 const {User} = require("../models/user"); 
 // no importamos la funcion validate de user, ya que solo queremos
 // una funcion que nos valide emai y passwortd

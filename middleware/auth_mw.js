@@ -6,8 +6,14 @@ module.exports =  function(req, res, next){
     // First, we retrieve the token from the header
     const token = req.header('x-auth-token');
 
+
     //if there's no token, abort the request with erroe code 401
-    if(!token) return res.status(401).send("Unauthorized (no token found )");
+        //if(!token) return res.status(401).send("Unauthorized (no token found )");
+
+    //another option: we redirect to login page
+
+    if(!token) return res.redirect("/views/login.html");
+
 
     //We have the token. Proceed to extract payload
     try{
