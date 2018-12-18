@@ -1,5 +1,5 @@
 
-var res = document.getElementById("resultado");
+
 var xhr = new XMLHttpRequest;
 
 
@@ -73,7 +73,6 @@ function updateColeccion(){
 }
 
 
-
 function create(){
     var data = leerCampos("nuevo");
     xhr.open('POST', endpoint + "colecciones/save", true);
@@ -83,7 +82,7 @@ function create(){
 
 
 function procesarRespuesta(e){
-
+    var res = document.getElementById("resultado");
     var intro = document.getElementById("addCollection");
     var nav=document.getElementById("navigation");
 
