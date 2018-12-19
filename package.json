@@ -19,5 +19,9 @@
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.3.14"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-watch": "^5.0.1"
   }
 }
