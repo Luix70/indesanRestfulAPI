@@ -19,13 +19,13 @@ router.get("/me" , auth_mw, async function(req, res) {
 
     //console.log("Buscamos informacion del usuario: " + req.currentUser._id);
     const user = await User.findById( req.currentUser._id);
-    
+    //console.log(req.currentUser);
     res.send(_.pick(user,["name" , "email"]));
 
 });
 
 
-router.post("/", async (req , res) => {
+router.post("/", auth_mw, async (req , res) => {
     //validamos  con joi el usuario que nos viene en el body
     // y lo destructuramos para obtener el error
     const {error} = validate(req.body); 

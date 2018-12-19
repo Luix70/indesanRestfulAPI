@@ -1,5 +1,5 @@
 
-var res = document.getElementById("resultado");
+
 var xhr = new XMLHttpRequest;
 
 
@@ -14,11 +14,10 @@ function leerCampos(origen){
         var thumbnail = document.getElementById("nombreImagen").innerHTML;
         var _id = document.getElementById("_id").innerHTML;
         var es_caption = document.getElementById("es_cap").value;
-        var fr_caption = document.getElementById("fr_cap").value;
+        var fr_caption = document.getElementById("fr_cap").value;s
         var en_caption = document.getElementById("en_cap").value;
 
     }
-
 
     if (origen === "nuevo"){
         var mod = document.getElementById("nuevaColeccion").value.toLowerCase();
@@ -73,7 +72,6 @@ function updateColeccion(){
 }
 
 
-
 function create(){
     var data = leerCampos("nuevo");
     xhr.open('POST', endpoint + "colecciones/save", true);
@@ -83,7 +81,7 @@ function create(){
 
 
 function procesarRespuesta(e){
-
+    var res = document.getElementById("resultado");
     var intro = document.getElementById("addCollection");
     var nav=document.getElementById("navigation");
 

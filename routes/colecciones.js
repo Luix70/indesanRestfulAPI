@@ -9,7 +9,7 @@ const express=require("express");
 const router = express.Router();
 const db = require("../classes/dbconnections.js");
 const fs = require("fs");
-
+const auth_mw = require("../middleware/auth_mw");
 
 // FUNCIONES AUXILIARES
 fs.readFile("./views/plantillaColeccion.html",(err, data)=>{global.plantilla = data.toString()});
@@ -54,7 +54,7 @@ function mergePlantilla(result , texto){
             replace(":_id:",result._id,).
             replace(":es_caption:",result.captions.es ).
             replace(":fr_caption:",result.captions.fr).
-            replace(":en_caption:",result.captions.en)
+            replace(":en_caption:",result.captions.en);
             
 }
 
@@ -70,7 +70,7 @@ router.get("/",(req,res)=>{
 
 
 
-router.get("/buscar", devolverForm);
+router.get("/buscar",  devolverForm);
 router.get("/buscar.html", devolverForm);
 
 router.get("/:lan/:coleccion",(req,res)=>{
