@@ -9,24 +9,20 @@ module.exports =  function(req, res, next){
     //return next();
     //
 
-
+   
     // First, we retrieve the token from the header
-    const token = req.header('x-auth-token');
+    var token = req.header('x-auth-token');
 
+    
+    
     //if there's no token, abort the request with erroe code 401
-        //if(!token) return res.status(401).send("Unauthorized (no token found )");
+    //if(!token) return res.status(401).send("Unauthorized (no token found )");
 
     //another option: we redirect to login page
+    //console.log("valor del token recibido : "+ token)
+    if(!token ) {
 
-    if(!token) {
-        fs.readFile("./views/login.html",(err,data) =>{
-
-            if (err) return res.status(404).send("login.html no encontrado " + err);
-
-            //enviamos el codigo del formulario de login para que el usuario introduzca la contraseña
-            return res.send(data);
-                
-        })
+        redirigirLogin();
  
     } else {
 
@@ -53,11 +49,21 @@ module.exports =  function(req, res, next){
             
 
         }catch(er){
-            return res.status(401).send("Unauthorized (token invalid)");
+            redirigirLogin();
+            //return res.status(401).send("Unauthorized (token invalid) " + token );
         }
     }
 
+    function redirigirLogin(){
+        fs.readFile("./views/login.html",(err,data) =>{
 
+            if (err) return res.status(404).send("login.html no encontrado " + err);
+
+            //enviamos el codigo del formulario de login para que el usuario introduzca la contraseña
+            return res.send(data.toString().replace(/:redirect:/g , req.originalUrl));
+                
+        })
+    };
    
     
 

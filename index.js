@@ -3,7 +3,7 @@ const app = express();
 
 const auth = require("./routes/auth");
 const colecciones = require("./routes/colecciones.js");
-const users = require("./routes/users.js");
+const usuarios = require("./routes/users.js");
 const raiz = require("./routes/root.js");
 const fs=require("fs");
 const https= require("https");
@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(cors());
 app.use ("/", raiz);
 app.use("/colecciones", colecciones);
-app.use("/usuarios", users);
+app.use("/usuarios", usuarios);
 app.use("/auth",auth);
 app.use(express.static("./static"));
 

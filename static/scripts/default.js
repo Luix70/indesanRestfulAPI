@@ -1,5 +1,6 @@
 
-var token=sessionStorage.getItem("token");
+var token = sessionStorage.getItem("token").replace('"','');
+
 
 function recuperarContenido(ruta){
     
@@ -20,13 +21,12 @@ function recuperarContenido(ruta){
     
     }
 
-    
     var contenido = document.getElementById("contPrincipal");
-    //console.log(contenido.innerHTML);
+    
     xhr.open("GET",ruta, true);
-    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-    if (token) xhr.setRequestHeader('x-auth-token',token);
-    //console.log(token);
+    xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+    console.log("Valor del token que pasamos : " + token);
+    xhr.setRequestHeader("x-auth-token", token);
     xhr.send();
 
 }
@@ -50,5 +50,14 @@ function mostrar_formBusqueda(){
 
     recuperarContenido("/colecciones/buscar");
 
+    
+}
+
+function cerrar_sesion(){
+     token = "";
+    sessionStorage.setItem("token",token);
+//    console.log("Establecido el valor del token en: " + sessionStorage.getItem("token"));
+    var contenido = document.getElementById("contPrincipal");
+    contenido.innerHTML="-";
     
 }
