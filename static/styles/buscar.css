@@ -1,3 +1,5 @@
+@import "normalize.css";
+
 $colorFondo: #eedddd;
 
 html{
@@ -5,7 +7,7 @@ html{
 }
 
 #addCollection, #resultado {
-           background-color: $colorFondo;
+           background-color:$colorFondo;
            padding:1em;
            width:40rem;
            text-align: center;

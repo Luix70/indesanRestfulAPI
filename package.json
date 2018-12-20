@@ -18,7 +18,8 @@
     "joi": "^14.3.0",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
-    "mongoose": "^5.3.14"
+    "mongoose": "^5.3.14",
+    "normalize.css": "^8.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^9.4.3",
