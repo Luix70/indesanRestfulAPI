@@ -1,7 +1,6 @@
 
 var token = sessionStorage.getItem("token").replace('"','');
 
-
 function recuperarContenido(ruta){
     
     var xhr = new XMLHttpRequest;
@@ -20,7 +19,7 @@ function recuperarContenido(ruta){
         }
     
     }
-
+    
     var contenido = document.getElementById("contPrincipal");
     
     xhr.open("GET",ruta, true);
