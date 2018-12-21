@@ -65,9 +65,21 @@ function cerrar_sesion(){
 function generarFilePond(){
     const inputElement = document.getElementById('filepond__input');
     const pond = FilePond.create( inputElement );
-    console.log(inputElement);
+    
     FilePond.setOptions({
-            server: endpoint + 'colecciones/upload'
+
+            server: endpoint + 'colecciones/upload',
+            // traduccion
+            labelIdle: "Arrastra aquí un archivo JPG o <br><span class='filepond--label-action'>clica para examinar</span>",
+            labelFileLoadError: "Error al cargar el archivo ",
+            labelFileProcessing: ['Subiendo', Type.STRING],
+            labelFileProcessingComplete: ['Carga Completa', Type.STRING],
+            labelFileProcessingAborted: ['Carga Cancelada', Type.STRING],
+            labelFileProcessingError: ['Error durante la subida', Type.STRING],
+            labelFileProcessingPaused: ['Subida en pausa', Type.STRING],
+            labelTapToCancel: ['pulsa para cancelar', Type.STRING],
+            labelTapToRetry: ['pulsa para intentarlo', Type.STRING],
+            labelTapToUndo: ['pulsa para deshacer', Type.STRING],
     });
 
 }

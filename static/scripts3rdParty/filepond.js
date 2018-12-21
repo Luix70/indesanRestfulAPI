@@ -2243,7 +2243,7 @@
     labelThousandsSeparator: [getThousandsSeparator(), Type.STRING], // Default is locale separator
 
     labelIdle: [
-      'Arrastra aquí los archivos o <br><span class="filepond--label-action">clica para examinar</span>',
+      'Drag & Drop or  <br><span class="filepond--label-action">BROWSE</span>',
       Type.STRING
     ],
 
