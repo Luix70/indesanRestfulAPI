@@ -190,17 +190,17 @@ function generarFilePond(){
     FilePond.setOptions({
 
             server: endpoint + 'colecciones/upload',
-            // traduccion
+            
             labelIdle: "Arrastra aquí un archivo JPG o <br><span class='filepond--label-action'>clica para examinar</span>",
             labelFileLoadError: "Error al cargar el archivo ",
-            labelFileProcessing: ['Subiendo', Type.STRING],
-            labelFileProcessingComplete: ['Carga Completa', Type.STRING],
-            labelFileProcessingAborted: ['Carga Cancelada', Type.STRING],
-            labelFileProcessingError: ['Error durante la subida', Type.STRING],
-            labelFileProcessingPaused: ['Subida en pausa', Type.STRING],
-            labelTapToCancel: ['pulsa para cancelar', Type.STRING],
-            labelTapToRetry: ['pulsa para intentarlo', Type.STRING],
-            labelTapToUndo: ['pulsa para deshacer', Type.STRING],
+            labelFileProcessing: "Subiendo",
+            labelFileProcessingComplete: "Carga Completa",
+            labelFileProcessingAborted: "Carga Cancelada",
+            labelFileProcessingError: "Error durante la subida",
+            labelFileProcessingPaused: "Subida en pausa",
+            labelTapToCancel: "pulsa para cancelar",
+            labelTapToRetry: "pulsa para intentarlo",
+            labelTapToUndo: "pulsa para deshacer"
     });
 
 }
