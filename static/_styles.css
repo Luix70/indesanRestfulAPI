@@ -354,7 +354,7 @@ html{
 }
 
 #addCollection, #resultado {
-           background-color: #eedddd;
+           background-color:#eedddd;
            padding:1em;
            width:40rem;
            text-align: center;
@@ -503,6 +503,11 @@ visibility:hidden;
     padding:0;
     border: 1px solid red;
     min-height: 100%;
+}
+
+#filepond__container{
+    width: 20rem;
+    margin:1rem auto;
 }
 h1 {
     color: brown;

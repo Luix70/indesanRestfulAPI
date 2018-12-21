@@ -37,3 +37,7 @@
     border: 1px solid red;
     min-height: 100%;
 }
+#filepond__container{
+    width: 20rem;
+    margin:1rem auto;
+}

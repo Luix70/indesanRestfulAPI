@@ -1,7 +1,7 @@
 
 var token = sessionStorage.getItem("token").replace('"','');
 
-function recuperarContenido(ruta){
+function recuperarContenido(ruta, next){
     
     var xhr = new XMLHttpRequest;
 
@@ -10,6 +10,7 @@ function recuperarContenido(ruta){
         if (xhr.readyState == 4 && xhr.status == 200) {
             //todo ha ido bien
             contenido.innerHTML= xhr.response;
+            next();
         }
     
         if (xhr.readyState == 4 && xhr.status != 200) {
@@ -47,8 +48,8 @@ function mostrar_colecciones(){
 }
 function mostrar_formBusqueda(){
 
-    recuperarContenido("/colecciones/buscar");
-
+    recuperarContenido("/colecciones/buscar",generarFilePond);
+    
     
 }
 
@@ -59,4 +60,14 @@ function cerrar_sesion(){
     var contenido = document.getElementById("contPrincipal");
     contenido.innerHTML="-";
     
+}
+
+function generarFilePond(){
+    const inputElement = document.getElementById('filepond__input');
+    const pond = FilePond.create( inputElement );
+    console.log(inputElement);
+    FilePond.setOptions({
+            server: endpoint + 'colecciones/upload'
+    });
+
 }

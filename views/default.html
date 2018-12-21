@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <link rel="stylesheet" href="../_styles.css">
     <script>
         //variables globales durante toda la aplicacion
         var endpoint = ":endpoint:";
-  
     </script>
-    <script src="/_script.js"></script>
+
+    <script src="../_script.js"></script>
+    <script src="../scripts3rdParty/filepond.js"></script>
     
+    <link rel="stylesheet" href="../_styles.css">
+    <link rel="stylesheet" href="../styles3rdParty/filepond.css">
     
-    <title>Document</title>
+    <title>Indesan Web. Content Management System</title>
 </head>
 <body>
 <div id="navHeader">
@@ -23,9 +25,16 @@
     <a href="#" onclick="mostrar_colecciones()" class = "btn protegido" >Lista de colecciones</a>
     <a href="#" onclick="mostrar_formBusqueda()" class = "btn protegido" >Buscar Coleccion</a>
     <a href="#" onclick="cerrar_sesion()" class = "btn desprotegido" >Cerrar Sesion</a>
+   
 </div>
 <div id="contPrincipal">
 <span>-</span>
 </div>
+
+
+
+
+
+
 </body>
 </html>

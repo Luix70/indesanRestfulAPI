@@ -33,8 +33,8 @@ gulp.task("rn", async function(){
 
 gulp.task("watch", async function(){
     console.log("tarea que vigila jos javasscripts");
-    watch("./static/scripts/**/*.js",gulp.series("cj","rn"));
+    watch("./static/scripts/**/*.js",gulp.series("cj"));
 
-    watch("./static/styles/**/*.css",gulp.series("cs","rn"));
+    watch("./static/styles/**/*.css",gulp.series("cs"));
 
 })
