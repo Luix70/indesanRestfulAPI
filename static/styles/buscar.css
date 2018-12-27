@@ -1,6 +1,6 @@
 @import "normalize.css";
 
-$colorFondo: #eedddd;
+$colorFondo: #cfc;
 
 html{
     font-family: "Lato", sans-serif;
@@ -8,7 +8,7 @@ html{
 
 #addCollection, #resultado {
            background-color:$colorFondo;
-           padding:1em;
+           padding:1rem;
            width:40rem;
            text-align: center;
            margin:1rem auto;
@@ -62,9 +62,9 @@ visibility:hidden;
 
 .__titulo{
     
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 500;
-    color: #fff;
+    color: #ccc;
     position: absolute;
     top:80%;
     left:0;
@@ -92,14 +92,14 @@ visibility:hidden;
 .btnNav{
     color: #fff;
     text-decoration: none;
-    background-color: #999;
+    background-color: #9999ff;
     padding:0.3rem;
     margin:0 1rem 0 1rem;
     transition-duration: 0.4s;
 }
 
 .btnNav:hover{
-    background-color: #fff;
+    background-color: #22f;
     color:#222;
 
 }

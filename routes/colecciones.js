@@ -70,8 +70,6 @@ router.get("/",(req,res)=>{
     
 })
 
-
-
 router.get("/buscar",  devolverForm);
 router.get("/buscar.html", devolverForm);
 
