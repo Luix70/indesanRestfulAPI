@@ -1,6 +1,25 @@
 @import "normalize.css";
 
-$colorFondo: #cfc;
+$colorFondo: #cff;
+$colorLetra: #fdf;
+
+@define-mixin atSmall {
+    @media (min-width: 530px){
+        @mixin-content;
+    }
+}
+
+@define-mixin atMedium {
+    @media (min-width: 800px){
+        @mixin-content;
+    }
+}
+
+@define-mixin atLarge {
+    @media (min-width: 1200px){
+        @mixin-content;
+    }
+}
 
 html{
     font-family: "Lato", sans-serif;
@@ -62,9 +81,9 @@ visibility:hidden;
 
 .__titulo{
     
-    font-size: 2rem;
-    font-weight: 500;
-    color: #ccc;
+    font-size: 1rem;
+    font-weight: 400;
+    color: $colorLetra;
     position: absolute;
     top:80%;
     left:0;
@@ -72,7 +91,19 @@ visibility:hidden;
     text-align: center;
     margin:0;
     padding: 0;
-    text-shadow: 3px 3px 2px rgba(0,0,0,0.4);
+    text-shadow: 3px 3px 3px rgba(0,0,0,0.6);
+
+    @mixin atSmall{
+        font-size:2rem;
+    }
+    @mixin atMedium{
+        font-size:3rem;
+    }
+    @mixin atLarge{
+        font-size:4rem;
+    }
+
+
 }
 
 #navigation{

@@ -354,7 +354,7 @@ html{
 }
 
 #addCollection, #resultado {
-           background-color:#cfc;
+           background-color:#cff;
            padding:1rem;
            width:40rem;
            text-align: center;
@@ -405,9 +405,9 @@ visibility:hidden;
 
 .__titulo{
     
-    font-size: 2rem;
-    font-weight: 500;
-    color: #ccc;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #fdf;
     position: absolute;
     top:80%;
     left:0;
@@ -415,8 +415,37 @@ visibility:hidden;
     text-align: center;
     margin:0;
     padding: 0;
-    text-shadow: 3px 3px 2px rgba(0,0,0,0.4);
+    text-shadow: 3px 3px 3px rgba(0,0,0,0.6);
+
+
 }
+
+@media (min-width: 530px){
+
+.__titulo{
+        font-size:2rem
+
+
+}
+    }
+
+@media (min-width: 800px){
+
+.__titulo{
+        font-size:3rem
+
+
+}
+    }
+
+@media (min-width: 1200px){
+
+.__titulo{
+        font-size:4rem
+
+
+}
+    }
 
 #navigation{
     background-color: #ddd;
@@ -511,7 +540,23 @@ visibility:hidden;
 }
 h1 {
     color: brown;
+    font-size:1rem;
 }
+    
+    @media (min-width: 530px){h1 {
+        font-size:2rem
+}
+    }
+    
+    @media (min-width: 800px){h1 {
+        font-size:3rem
+}
+    }
+    
+    @media (min-width: 1200px){h1 {
+        font-size:4rem
+}
+    }
 
 #container_login{
     width:30rem;
