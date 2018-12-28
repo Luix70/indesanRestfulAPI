@@ -1,6 +1,6 @@
 @import "normalize.css";
 
-$colorFondo: #cff;
+$colorFondo: #ccf;
 $colorLetra: #fdf;
 
 @define-mixin atSmall {
