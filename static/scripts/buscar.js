@@ -14,7 +14,7 @@ function leerCampos(origen){
         var thumbnail = document.getElementById("nombreImagen").innerHTML;
         var _id = document.getElementById("_id").innerHTML;
         var es_caption = document.getElementById("es_cap").value;
-        var fr_caption = document.getElementById("fr_cap").value;s
+        var fr_caption = document.getElementById("fr_cap").value;
         var en_caption = document.getElementById("en_cap").value;
 
     }
@@ -97,6 +97,7 @@ function procesarRespuesta(e){
 
     }
 
+    
     if (xhr.readyState == 4 && xhr.status != 200) {
         
         res.innerHTML= xhr.response;

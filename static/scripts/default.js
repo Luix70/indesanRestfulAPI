@@ -1,8 +1,7 @@
 
 var token = sessionStorage.getItem("token").replace('"','');
 
-
-function recuperarContenido(ruta){
+function recuperarContenido(ruta, next){
     
     var xhr = new XMLHttpRequest;
 
@@ -11,6 +10,7 @@ function recuperarContenido(ruta){
         if (xhr.readyState == 4 && xhr.status == 200) {
             //todo ha ido bien
             contenido.innerHTML= xhr.response;
+            next();
         }
     
         if (xhr.readyState == 4 && xhr.status != 200) {
@@ -20,7 +20,7 @@ function recuperarContenido(ruta){
         }
     
     }
-
+    
     var contenido = document.getElementById("contPrincipal");
     
     xhr.open("GET",ruta, true);
@@ -48,8 +48,8 @@ function mostrar_colecciones(){
 }
 function mostrar_formBusqueda(){
 
-    recuperarContenido("/colecciones/buscar");
-
+    recuperarContenido("/colecciones/buscar",generarFilePond);
+    
     
 }
 
@@ -60,4 +60,26 @@ function cerrar_sesion(){
     var contenido = document.getElementById("contPrincipal");
     contenido.innerHTML="-";
     
+}
+
+function generarFilePond(){
+    const inputElement = document.getElementById('filepond__input');
+    const pond = FilePond.create( inputElement );
+    
+    FilePond.setOptions({
+
+            server: endpoint + 'colecciones/upload',
+            
+            labelIdle: "Arrastra aquí un archivo JPG o <br><span class='filepond--label-action'>clica para examinar</span>",
+            labelFileLoadError: "Error al cargar el archivo ",
+            labelFileProcessing: "Subiendo",
+            labelFileProcessingComplete: "Carga Completa",
+            labelFileProcessingAborted: "Carga Cancelada",
+            labelFileProcessingError: "Error durante la subida",
+            labelFileProcessingPaused: "Subida en pausa",
+            labelTapToCancel: "pulsa para cancelar",
+            labelTapToRetry: "pulsa para intentarlo",
+            labelTapToUndo: "pulsa para deshacer"
+    });
+
 }

@@ -9,7 +9,9 @@ const express=require("express");
 const router = express.Router();
 const db = require("../classes/dbconnections.js");
 const fs = require("fs");
-const auth_mw = require("../middleware/auth_mw");
+const fileUpload = require('express-fileupload')
+
+router.use(fileUpload());
 
 // FUNCIONES AUXILIARES
 fs.readFile("./views/plantillaColeccion.html",(err, data)=>{global.plantilla = data.toString()});
@@ -67,8 +69,6 @@ router.get("/",(req,res)=>{
     });
     
 })
-
-
 
 router.get("/buscar",  devolverForm);
 router.get("/buscar.html", devolverForm);
@@ -177,11 +177,33 @@ router.delete("/:modelo",(req,res) =>{
                     fr:"Collection effacée"
                 }
             }
+
             res.send(mergePlantilla(resultado , "ELIMINADO : "  + modelo));
 
         }
         
     });
+});
+
+router.post("/upload",function(req, res){
+
+    console.log(req.files)
+    let uploadFile = req.files.filepond
+    const fileName = req.files.filepond.name
+    console.log( `${__dirname}/../static/thumbs/${fileName}`);
+    uploadFile.mv(
+         `${__dirname}/../static/thumbs/${fileName}`,
+         function (err) {
+         if (err) {
+            console.log(err); 
+            return res.status(500).send(err)
+          }
+    
+          res.json({
+            file: `../thumbs/${req.files.filepond.name}`,
+          })
+        }
+      )
 });
 
 module.exports = router
