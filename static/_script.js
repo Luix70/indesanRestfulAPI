@@ -131,6 +131,7 @@ function ocultar(){
 }
 
 var token = sessionStorage.getItem("token").replace('"','');
+const Filepond = require("filepond");
 
 function recuperarContenido(ruta, next){
     
@@ -195,13 +196,17 @@ function cerrar_sesion(){
 
 function generarFilePond(){
     const inputElement = document.getElementById('filepond__input');
+    console.log (inputElement.id);
     const pond = FilePond.create( inputElement );
     
     FilePond.setOptions({
 
             server: endpoint + 'colecciones/upload',
             
-            labelIdle: "Arrastra aquí un archivo JPG o <br><span class='filepond--label-action'>clica para examinar</span>",
+            imageCropAspectRatio: '1:1',
+            imageResizeTargetWidth: 512,
+            imageResizeTargetHeight: 512,
+            labelIdle: "Arrastra aquí un archivo JPG o <br><span class='filepond--label-action'>clica para examinar</span></br>Se ajustará tamaño a 512x512 px",
             labelFileLoadError: "Error al cargar el archivo ",
             labelFileProcessing: "Subiendo",
             labelFileProcessingComplete: "Carga Completa",
