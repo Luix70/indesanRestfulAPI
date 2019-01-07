@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-fileupload": "^1.0.0",
+    "filepond": "^3.7.4",
     "joi": "^14.3.0",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
