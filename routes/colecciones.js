@@ -70,6 +70,15 @@ router.get("/",(req,res)=>{
     
 })
 
+
+router.get("/web",(req,res)=>{
+ 
+    db.getColeccionesActivas((colecciones)=>{
+        res.json(colecciones);
+    });
+    
+})
+
 router.get("/buscar",  devolverForm);
 router.get("/buscar.html", devolverForm);
 

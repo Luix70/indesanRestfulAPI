@@ -24,6 +24,11 @@ async function getColecciones(callback){
     callback(colecciones);
 }
 
+async function getColeccionesActivas(callback){
+    const colecciones = await col.Coleccion.find({activa : true});
+    callback(colecciones);
+}
+
 
 async function getColeccion( param, callback){
    await col.Coleccion.find({mod:param})
@@ -98,4 +103,5 @@ module.exports.deleteColeccion = deleteColeccion;
 module.exports.addColeccion = addColeccion;
 module.exports.getColeccion = getColeccion;
 module.exports.getColecciones = getColecciones;
+module.exports.getColeccionesActivas = getColeccionesActivas;
 module.exports.Coleccion = col.Coleccion;
