@@ -354,9 +354,9 @@ html{
 }
 
 #addCollection, #resultado {
-           background-color:#fcf;
+           background-color:#dff;
            padding:1rem;
-           width:40rem;
+           width:90%;
            text-align: center;
            margin:1rem auto;
 
@@ -367,15 +367,8 @@ html{
     font-size: 0.8rem;
     margin:1rem 1rem 1rem 1rem;
     width:30rem;
+    visibility: hidden;
 
-}
-
-.subtitulos{
-    
-    width:30rem;
-   
-    margin: 1rem auto;
-    
 }
 
 .visible{
@@ -397,33 +390,49 @@ visibility:hidden;
 
 .thumbContainer{
     position: relative;
-    width:35rem;
+    display:inline-block;
+    width:100%;
     text-align: center;
     margin:1rem auto;
-    min-height: 300px; 
+    min-height: 300px;
 }
+
+.thumbContainer--thumb {
+        float:left;
+        width:256px;
+        height:auto;
+    }
+
+.thumbContainer--subtitulos {
+        width:70%;
+        float:left;
+        text-align:left;
+        margin-left:1rem;
+       
+    }
 
 .__titulo{
     
     font-size: 1rem;
-    font-weight: 400;
-    color: #fcf;
+    font-weight: 200;
+    color: #0cf;
     position: absolute;
-    top:80%;
+    top:98%;
     left:0;
     width:100%;
     text-align: center;
     margin:0;
     padding: 0;
-    text-shadow: 3px 3px 3px rgba(0,0,0,0.6);
 
 
 }
 
+/* text-shadow: 3px 3px 3px rgba(0,0,0,0.6); */
+
 @media (min-width: 530px){
 
 .__titulo{
-        font-size:2rem
+        font-size:1rem
 
 
 }
@@ -432,7 +441,7 @@ visibility:hidden;
 @media (min-width: 800px){
 
 .__titulo{
-        font-size:3rem
+        font-size:1rem
 
 
 }
@@ -441,7 +450,7 @@ visibility:hidden;
 @media (min-width: 1200px){
 
 .__titulo{
-        font-size:4rem
+        font-size:1rem
 
 
 }
@@ -478,22 +487,35 @@ visibility:hidden;
 }
 
 .lang_cap{
+    width:10rem;
     display:inline-block;
     font-weight: bold;
     width:5rem;
-    text-align: right; 
+    text-align: left; 
     margin-right: 0.2rem;
 }
 
 .lang_text{
-    display:inline-block;
-    width:23rem;
+
+   
+    width:80%;
     border:0;
     border-bottom: 2px solid #ddd;
     text-align: left; 
     padding:0 0.2rem;
 }
 
+.lang_desc{
+
+    margin:0.125rem 0 0.5rem 5.5rem;
+    
+    width:80%;
+    height:2.5rem;
+    border:0;
+    border-bottom: 2px solid #ddd;
+    text-align: left; 
+    padding:0 0.2rem;
+}
 
 .btn{
     display:inline-block;

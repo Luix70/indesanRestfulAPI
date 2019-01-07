@@ -3,6 +3,7 @@
 
 const mongoose = require("mongoose");
 const config = require("config");
+const col = require("../models/coleccion.js");
 const mongoProtocol = config.get("DB_PROTOCOL") ; // Reside en Atlas
 const mongoServer = config.get("DB_SERVER") ;
 const mongoDB = config.get("DB_BASE") ;
@@ -15,44 +16,28 @@ mongoose.connect(mongoConectionString, {useNewUrlParser : true, useCreateIndex: 
     .then(()=>{console.log("conectado a MongoDB Atlas (En la Nube). parametrizado");})
     .catch((err)=>{console.log("Algo fue mal con los parametros: \n" + err )});
 
-const captionsSchema = new mongoose.Schema({
-    es: {type: String, required: true},
-    en: {type: String},
-    fr: {type: String}
-
-});
-
-
-const colSchema = new mongoose.Schema({
-    mod : {type: String, required : true, unique: true},
-    thumbnail : {type: String, default : "Nothumb_tn"} ,
-    activa:{ type: Boolean, default: true},
-    captions: captionsSchema
-});
-
-const Coleccion = mongoose.model('colecciones',colSchema);
 
 
 
 async function getColecciones(callback){
-    const colecciones = await Coleccion.find();
+    const colecciones = await col.Coleccion.find();
     callback(colecciones);
 }
 
 
 async function getColeccion( param, callback){
-   await Coleccion.find({mod:param})
+   await col.Coleccion.find({mod:param})
    .then(resultado =>{
 
 
-        if(resultado.length != 0 && !resultado[0].captions ){
+        // if(resultado.length != 0 && !resultado[0].captions ){
             
-            resultado[0].captions ={"es":"---------",
-                                "fr": "----------",
-                                "en": "---------"
-                                }
+        //     resultado[0].captions ={"es":"---------",
+        //                         "fr": "----------",
+        //                         "en": "---------"
+        //                         }
             
-        } 
+        // } 
         
         callback(resultado);
     
@@ -76,7 +61,7 @@ async function addColeccion(coleccion, callback){
 }
 
 async function deleteColeccion(nombre, callback) {
-    const result= await Coleccion.deleteOne ({ mod: nombre});
+    const result= await col.Coleccion.deleteOne ({ mod: nombre});
     
     callback(result);                   
 }
@@ -84,7 +69,8 @@ async function deleteColeccion(nombre, callback) {
 
 function updateColeccion(coleccion, callback) {
     //buscamos por modelo en primer lugar
-    Coleccion.findOne({_id:  coleccion._id}, (err , result) =>{
+    //console.log("recibido por update coleccion " + coleccion )
+    col.Coleccion.findOne({_id:  coleccion._id}, (err , result) =>{
 
         if(!result) {
             console.log(err);
@@ -93,6 +79,7 @@ function updateColeccion(coleccion, callback) {
 
         result.set({
             captions:coleccion.captions,
+            desc:coleccion.desc,
             mod: coleccion.mod,
             thumbnail: coleccion.thumbnail,
             activa: coleccion.activa
@@ -111,4 +98,4 @@ module.exports.deleteColeccion = deleteColeccion;
 module.exports.addColeccion = addColeccion;
 module.exports.getColeccion = getColeccion;
 module.exports.getColecciones = getColecciones;
-module.exports.Coleccion = Coleccion;
+module.exports.Coleccion = col.Coleccion;

@@ -17,10 +17,12 @@ gulp.task("watch", async function(){
 
     //encargamos a browseSync la tarea de actualizar el css, sin recargar la página
     watch("./static/styles/**/*.css", gulp.series("cs","cssInject"));
+
+    watch("./models/**/*.js",gulp.series("cj","reload"));
     
 })
 
-gulp.task("cssInject",  function(){
+gulp.task("cssInject", gulp.series("cs"), function(){
     //console.log("inyeccion del archivo de estilo");
     return gulp.src("./static/_styles.css").pipe(browserSync.stream());
 

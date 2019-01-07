@@ -1,10 +1,8 @@
 const {User, validate} = require("../models/user"); // asignacion por object destructuring
-const mongoose = require("mongoose");
 const express=require("express");
 const router = express.Router();
 const _ = require("lodash"); //utiliades
 const bcrypt=require("bcryptjs");
-const config = require("config");
 const auth_mw = require("../middleware/auth_mw")
 
 

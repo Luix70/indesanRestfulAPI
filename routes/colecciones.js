@@ -1,9 +1,5 @@
-/*
- * Modulo que contiene la funcionalidad de enrutamiento de express
- * para la aplicacion IndesanWeb
- * así como las funciones de base de datos
- *  
- */
+/* Modulo que contiene la funcionalidad de enrutamiento de express
+ * para la aplicacion IndesanWeb */
 
 const express=require("express");
 const router = express.Router();
@@ -49,14 +45,18 @@ function devolverForm(req,res){
 }
 
 function mergePlantilla(result , texto){
-    
+    //console.log("merge plantilla result " + result);
     return plantilla.replace(":saludo:",texto).
             replace(/:imagen:/g , result.thumbnail).
             replace(/:titulo:/g, result.thumbnail).
+            replace(":activa:", (result.activa ? "checked" :null )).
             replace(":_id:",result._id,).
             replace(":es_caption:",result.captions.es ).
             replace(":fr_caption:",result.captions.fr).
-            replace(":en_caption:",result.captions.en);
+            replace(":en_caption:",result.captions.en).
+            replace(":es_desc:", result.desc ? result.desc.es : "es_desc" ).
+            replace(":fr_desc:", result.desc ? result.desc.fr : "fr_desc" ).
+            replace(":en_desc:", result.desc ? result.desc.en : "en_desc");
             
 }
 
@@ -89,7 +89,7 @@ router.get("/:lan/:coleccion",(req,res)=>{
             } else {
                 
                 var saludo = saludar(req.params.lan.toLowerCase());
-                
+               
                 res.send( 
 
                     mergePlantilla(resultado[0] , saludo + modelo )
@@ -104,13 +104,19 @@ function recuperarColeccion(req){
     const mod = req.body.mod.toLowerCase();
     const thumbnail = req.body.thumbnail;
     const _id = req.body._id;
-    const es_caption = req.body.es_caption || "----------";
-    const fr_caption = req.body.fr_caption || "----------";
-    const en_caption = req.body.en_caption || "----------";
+    const activa = req.body.activa || false;
+    const es_caption = req.body.es_caption || "es_caption";
+    const es_desc = req.body.es_desc || "es_desc";
+    const fr_caption = req.body.fr_caption || "fr_caption";
+    const fr_desc = req.body.fr_desc || "fr_desc";
+    const en_caption = req.body.en_caption || "en_caption";
+    const en_desc = req.body.en_desc || "en_desc";
     const coleccion = new db.Coleccion({
         mod: mod,
         thumbnail : thumbnail,
-        captions: { es: es_caption, fr: fr_caption, en: en_caption}
+        activa: activa,
+        captions: { es: es_caption, fr: fr_caption, en: en_caption},
+        desc:{ es: es_desc , fr: fr_desc, en : en_desc }
     });
     if (_id !="?") {
         coleccion._id=_id;
@@ -121,7 +127,8 @@ function recuperarColeccion(req){
 router.post("/save",(req,res) =>{
 
     const coleccion = recuperarColeccion(req);
-   
+ 
+
     db.addColeccion(coleccion, result =>{
  
         res.send( mergePlantilla(result, "Añadido: "  + result.mod) );
@@ -134,10 +141,11 @@ router.put("/update",(req,res) =>{
     
     const coleccion = recuperarColeccion(req);
 
+    
+    
   
     db.updateColeccion(coleccion, result =>{
-        
-    
+
         res.send(mergePlantilla(result, "Modificado: "  + result.mod));
     })
     

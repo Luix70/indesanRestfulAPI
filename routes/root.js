@@ -1,6 +1,5 @@
 const express=require("express");
 const router = express.Router();
-const db = require("../classes/dbconnections.js");
 const fs = require("fs");
 var endpoint;
 

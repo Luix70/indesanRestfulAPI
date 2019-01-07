@@ -9,13 +9,19 @@ xhr.onreadystatechange = procesarRespuesta;
 
 function leerCampos(origen){
 
+        
+
     if (origen === "actual"){
+        var es_caption = document.getElementById("es_cap").value;
+        var es_desc=document.getElementById("es_desc").value;
+        var fr_caption = document.getElementById("fr_cap").value;
+        var fr_desc=document.getElementById("fr_desc").value;
+        var en_caption = document.getElementById("en_cap").value;
+        var en_desc=document.getElementById("en_desc").value;
+        var activa = document.getElementById("cb_Activa").checked;
         var mod = document.getElementById("coleccion").value.toLowerCase();
         var thumbnail = document.getElementById("nombreImagen").innerHTML;
         var _id = document.getElementById("_id").innerHTML;
-        var es_caption = document.getElementById("es_cap").value;
-        var fr_caption = document.getElementById("fr_cap").value;
-        var en_caption = document.getElementById("en_cap").value;
 
     }
 
@@ -23,18 +29,21 @@ function leerCampos(origen){
         var mod = document.getElementById("nuevaColeccion").value.toLowerCase();
         var thumbnail = document.getElementById("nuevoThumb").value;
         var _id = "?";
-        var es_caption = document.getElementById("es_caption").value;
-        var fr_caption = document.getElementById("fr_caption").value;
-        var en_caption = document.getElementById("en_caption").value;
-
     }
 
     var data = JSON.stringify({     "mod": mod,
                                     "_id": _id,
                                     "thumbnail": thumbnail,
+                                    "activa"    : activa,
                                     "es_caption" : es_caption,
+                                    "es_desc"    : es_desc,   
                                     "fr_caption" : fr_caption,
-                                    "en_caption" : en_caption});
+                                    "fr_desc"    : fr_desc, 
+                                    "en_caption" : en_caption,
+                                    "en_desc"    : en_desc, 
+                                });
+    
+    
     
     return  data;
 
@@ -47,14 +56,14 @@ function query(){
 
   //averiguemos el idioma
   var   lan ="es"; //default
-  if (document.getElementById("en").checked ) lan = "en";
-  if (document.getElementById("fr").checked ) lan = "fr";
+//   if (document.getElementById("en").checked ) lan = "en";
+//   if (document.getElementById("fr").checked ) lan = "fr";
 
   xhr.open('GET', endpoint + "colecciones/" + lan +"/" + mod, true);
   xhr.send();
 
 }  
-
+ 
 function deleteColeccion(){
     var  mod = document.getElementById("coleccion").value;
     xhr.open('DELETE', endpoint + "colecciones/" + mod, true);

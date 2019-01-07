@@ -1,14 +1,29 @@
 <div class="thumbContainer">
-    <img class="thumb" src=":endpoint:thumbs/:imagen:" alt=":titulo:">
-    <span id="nombreImagen" class="invisible">:imagen:</span>
-    <span id="_id" class="invisible">:_id:</span>
-    <h1 class="__titulo">:saludo:</h1>
+    <div class = "thumbContainer--activa">
+            <input type="checkbox" :activa: id = "cb_Activa" >Activar Colección
     </div>
-    <div class="subtitulos">
-     <span class="lang_cap">Español: </span>
-     <input type="text" id="es_cap" value=":es_caption:" class="lang_text">
-     <span class="lang_cap">Francés: </span>
-     <input type="text" id="fr_cap" value=":fr_caption:" class="lang_text">
-     <span class="lang_cap">Inglés: </span>
-     <input type="text" id="en_cap" value=":en_caption:" class="lang_text">
+    <div>
+        <img class="thumbContainer--thumb" src=":endpoint:thumbs/:imagen:" alt=":titulo:">
+        <span id="nombreImagen" class="invisible">:imagen:</span>
+        <span id="_id" class="invisible">:_id:</span>
+        <h1 class="__titulo">:saludo:</h1>
     </div>
+
+    <div class="thumbContainer--subtitulos">
+        <div>
+            <span class="lang_cap">Español: </span>
+            <input type="text" id="es_cap" value=":es_caption:" class="lang_text">
+            <textarea id="es_desc" cols=40 rows=5  class="lang_desc">:es_desc:</textarea>
+        </div>
+        <div>
+            <span class="lang_cap">Francés: </span>
+            <input type="text" id="fr_cap" value=":fr_caption:" class="lang_text">
+            <textarea  cols=40 rows=5  id="fr_desc" class="lang_desc">:fr_desc:</textarea>
+        </div>
+        <div>
+            <span class="lang_cap">Inglés: </span>
+            <input type="text" id="en_cap" value=":en_caption:" class="lang_text">
+            <textarea cols=40 rows=5 id="en_desc"  class="lang_desc">:en_desc:</textarea>
+        </div>
+    </div>
+</div>
