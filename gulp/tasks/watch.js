@@ -10,7 +10,7 @@ gulp.task("watch", async function(){
             target:"https://localhost:3001",
             ws:true
         }
-        //, browser: "firefox"
+        , browser: "chrome"
     });
     
     watch("./static/scripts/**/*.js",gulp.series("cj","reload"));

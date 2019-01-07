@@ -354,7 +354,7 @@ html{
 }
 
 #addCollection, #resultado {
-           background-color:#ccf;
+           background-color:#fcf;
            padding:1rem;
            width:40rem;
            text-align: center;
@@ -407,7 +407,7 @@ visibility:hidden;
     
     font-size: 1rem;
     font-weight: 400;
-    color: #fdf;
+    color: #fcf;
     position: absolute;
     top:80%;
     left:0;

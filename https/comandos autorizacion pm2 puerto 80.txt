@@ -1,0 +1,11 @@
+
+
+If you only need your daemon to be run as root in order to access a port number (such as 80 or 443), the pm2 documentation recommends using authbind. So, if you want the user yourusername to have access to port 80, run:
+
+$ sudo apt-get install authbind
+$ sudo touch /etc/authbind/byport/80
+$ sudo chown yourusername /etc/authbind/byport/80
+$ sudo chmod 755 /etc/authbind/byport/80
+$ authbind --deep pm2 update
+
+And then use authbind --deep pm2 instead of pm2. The documentation suggests setting up an alias.

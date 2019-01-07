@@ -1,7 +1,7 @@
 @import "normalize.css";
 
-$colorFondo: #ccf;
-$colorLetra: #fdf;
+$colorFondo: #fcf;
+$colorLetra: #fcf;
 
 @define-mixin atSmall {
     @media (min-width: 530px){
