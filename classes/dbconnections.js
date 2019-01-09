@@ -4,6 +4,7 @@
 const mongoose = require("mongoose");
 const config = require("config");
 const col = require("../models/coleccion.js");
+const img = require("../models/imagen.js");
 const mongoProtocol = config.get("DB_PROTOCOL") ; // Reside en Atlas
 const mongoServer = config.get("DB_SERVER") ;
 const mongoDB = config.get("DB_BASE") ;
@@ -98,10 +99,18 @@ function updateColeccion(coleccion, callback) {
       
 }
 
+
+async function getImagenesColeccion(coleccion,callback){
+    const colecciones = await img.Imagen.find({colecciones: coleccion});
+    callback(colecciones);
+}
+
 module.exports.updateColeccion = updateColeccion;
 module.exports.deleteColeccion = deleteColeccion;
 module.exports.addColeccion = addColeccion;
 module.exports.getColeccion = getColeccion;
 module.exports.getColecciones = getColecciones;
 module.exports.getColeccionesActivas = getColeccionesActivas;
+module.exports.getImagenesColeccion = getImagenesColeccion;
 module.exports.Coleccion = col.Coleccion;
+module.exports.Imagen = img.Imagen;
