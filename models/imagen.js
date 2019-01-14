@@ -27,7 +27,8 @@ const imgSchema = new mongoose.Schema({
     modelos:[{type: modelSchema, required: true, default: modelSchema}],
     pieFoto:{type: captionsSchema, default: captionsSchema},
     instrucciones:{ type: String},
-    tecnico:{ type: String}
+    tecnico:{ type: String},
+    video:{ type: String}
 });
 
 const Imagen = mongoose.model('imagenes',imgSchema);

@@ -60,7 +60,8 @@ for (var i=0; i<contenido.length; i++) {
                       fr: fileJPG + ". Collection: " + nombreColeccion,
                       en: fileJPG + ". Collection: " + nombreColeccion},
             instrucciones:"...",
-            tecnico:"..."
+            tecnico:"...",
+            video:"..."
         }
 
         var image = new db.Imagen(docImage);
