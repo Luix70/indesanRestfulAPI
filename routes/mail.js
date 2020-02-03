@@ -1,25 +1,25 @@
 var express = require("express");
 var router = express.Router();
 var nodemailer = require("nodemailer");
-
 const config = require("config");
 
 var transport = {
-  host: config.SMTP_SERVER, // Don’t forget to replace with the SMTP host of your provider
-  port: config.SMTP_PORT,
+  host: config.get("SMTP_SERVER"), // Don’t forget to replace with the SMTP host of your provider
+  port: config.get("SMTP_PORT"),
   auth: {
-    user: config.SMTP_USER,
-    pass: config.SMTP_PASS
+    user: config.get("SMTP_USER"),
+    pass: config.get("SMTP_PASS")
   }
 };
 
+console.log(transport);
 var transporter = nodemailer.createTransport(transport);
 
 transporter.verify((error, success) => {
   if (error) {
-    console.log(error);
+    console.log("Oh, my god", error);
   } else {
-    console.log("Server is ready to take messages");
+    console.log("Praise the Lord");
   }
 });
 

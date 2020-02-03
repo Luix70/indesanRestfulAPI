@@ -1,11 +1,15 @@
 {
-    "JWTKey":"",
-    "PORT":"",
-    "sPORT":"",
-    "DB_SERVER":"",
-    "DB_PROTOCOL":"",
-    "DB_BASE":"",
-    "DB_USER":"",
-    "DB_PASS":"",
-    "NODE_ENV":""
+  "JWTKey": "",
+  "PORT": "",
+  "sPORT": "",
+  "DB_SERVER": "",
+  "DB_PROTOCOL": "",
+  "DB_BASE": "",
+  "DB_USER": "",
+  "DB_PASS": "",
+  "NODE_ENV": "",
+  "SMTP_SERVER": "box.indesan.com",
+  "SMTP_PORT": "587",
+  "SMTP_USER": "indesan@indesan.com",
+  "SMTP_PASS": "140670"
 }
