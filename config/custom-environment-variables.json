@@ -1,11 +1,15 @@
 {
- "JWTKey":"indesanRestfulAPI_JWTKey", 
- "PORT":"PORT",
- "sPORT": "sPORT",
- "DB_SERVER":"DB_SERVER",
- "DB_PROTOCOL":"DB_PROTOCOL",
- "DB_BASE":"DB_BASE",
- "DB_USER":"DB_USER",
- "DB_PASS":"DB_PASS",
- "NODE_ENV":"NODE_ENV"
+  "JWTKey": "indesanRestfulAPI_JWTKey",
+  "PORT": "PORT",
+  "sPORT": "sPORT",
+  "DB_SERVER": "DB_SERVER",
+  "DB_PROTOCOL": "DB_PROTOCOL",
+  "DB_BASE": "DB_BASE",
+  "DB_USER": "DB_USER",
+  "DB_PASS": "DB_PASS",
+  "NODE_ENV": "NODE_ENV",
+  "SMTP_SERVER": "SMTP_SERVER",
+  "SMTP_PORT": "SMTP_PORT",
+  "SMTP_USER": "SMTP_USER",
+  "SMTP_PASS": "SMTP_PASS"
 }
