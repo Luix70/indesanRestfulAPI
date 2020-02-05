@@ -35,7 +35,7 @@ router.post("/send", (req, res, next) => {
   var email = req.body.email;
   var message = req.body.message;
   var phone = req.body.phone;
-  var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n mensaje: ${message} `;
+  var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n =========================  MENSAJE ================ \n \n ${message} \n \n =======================FIN MENSAJE ================`;
 
   var mail = {
     from: "indesan@indesan.com",
@@ -44,7 +44,7 @@ router.post("/send", (req, res, next) => {
     text: content
   };
 
-  console.log(mail);
+  //console.log(mail);
   transporter.sendMail(mail, (err, data) => {
     if (err) {
       res.json({
