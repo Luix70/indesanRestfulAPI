@@ -11,6 +11,7 @@ var transport = {
     pass: config.get("SMTP_PASS")
   }
 };
+
 // var transport = {
 //   host: "smtp.mailtrap.io", // Don’t forget to replace with the SMTP host of your provider
 //   port: "587",
@@ -20,6 +21,7 @@ var transport = {
 //   }
 // };
 //console.log("trasport: ", transport);
+
 var transporter = nodemailer.createTransport(transport);
 
 transporter.verify((error, success) => {
@@ -35,10 +37,10 @@ router.post("/send", (req, res, next) => {
   var email = req.body.email;
   var message = req.body.message;
   var phone = req.body.phone;
-  var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n =========================  MENSAJE ================ \n \n ${message} \n \n =======================FIN MENSAJE ================`;
+  var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n \n  =========================  MENSAJE ================ \n \n ${message} \n \n =======================FIN MENSAJE ================`;
 
   var mail = {
-    from: "indesan@indesan.com",
+    from: "contacto@indesan.com",
     to: "compras@indesan.com", // Change to email address that you want to receive messages on
     subject: "Mensaje desde el formulario de contacto",
     text: content
