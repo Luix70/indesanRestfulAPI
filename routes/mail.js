@@ -19,7 +19,7 @@ var transport = {
 //     pass: "bda7fda18f5443"
 //   }
 // };
-console.log("trasport: ", transport);
+//console.log("trasport: ", transport);
 var transporter = nodemailer.createTransport(transport);
 
 transporter.verify((error, success) => {
@@ -34,10 +34,11 @@ router.post("/send", (req, res, next) => {
   var name = req.body.name;
   var email = req.body.email;
   var message = req.body.message;
-  var content = `\n nombre: ${name} \n email: ${email} \n mensaje: ${message} `;
+  var phone = req.body.phone;
+  var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n mensaje: ${message} `;
 
   var mail = {
-    from: transport.user,
+    from: "indesan@indesan.com",
     to: "compras@indesan.com", // Change to email address that you want to receive messages on
     subject: "Mensaje desde el formulario de contacto",
     text: content
