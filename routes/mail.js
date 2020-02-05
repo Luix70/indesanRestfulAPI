@@ -20,7 +20,8 @@ var transport = {
 //     pass: "bda7fda18f5443"
 //   }
 // };
-//console.log("trasport: ", transport);
+
+//console.log("transport: ", transport);
 
 var transporter = nodemailer.createTransport(transport);
 
@@ -37,7 +38,7 @@ router.post("/send", (req, res, next) => {
   var email = req.body.email;
   var message = req.body.message;
   var phone = req.body.phone;
-  var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n \n  =========================  MENSAJE ================ \n \n ${message} \n \n =======================FIN MENSAJE ================`;
+  var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n \n  ======  MENSAJE ====== \n \n ${message} \n \n ====== FIN MENSAJE ===`;
 
   var mail = {
     from: "contacto@indesan.com",
@@ -48,6 +49,29 @@ router.post("/send", (req, res, next) => {
 
   //console.log(mail);
   transporter.sendMail(mail, (err, data) => {
+    if (err) {
+      res.json({
+        status: "fail",
+        error: err
+      });
+    } else {
+      res.json({
+        status: "success"
+      });
+    }
+  });
+
+  //correo de confirmacion
+  var mail2 = {
+    from: "contacto@indesan.com",
+    to: email,
+    subject:
+      "Mensaje Recibido / Message bien reçu / Submission was successful ",
+    text: `ES: Gracias por contactar con nosotros! \nFR: Merci de nous contacter! \nEN: Thank you for contacting us! \n============================= \n ${content}`
+  };
+
+  //console.log(mail2);
+  transporter.sendMail(mail2, (err, data) => {
     if (err) {
       res.json({
         status: "fail",
