@@ -34,10 +34,10 @@ transporter.verify((error, success) => {
 });
 
 router.post("/send", (req, res, next) => {
-  var name = req.body.name;
+  var name = req.body.nombre;
   var email = req.body.email;
-  var message = req.body.message;
-  var phone = req.body.phone;
+  var message = req.body.mensaje;
+  var phone = req.body.telefono;
   var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n \n  ======  MENSAJE ====== \n \n ${message} \n \n ====== FIN MENSAJE ===`;
 
   var mail = {
