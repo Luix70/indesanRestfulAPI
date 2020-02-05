@@ -35,7 +35,11 @@ router.post("/send", (req, res, next) => {
   var email = req.body.email;
   var message = req.body.message;
   var phone = req.body.phone;
+<<<<<<< HEAD
   var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n =========================  MENSAJE ================ \n \n ${message} \n \n =======================FIN MENSAJE ================`;
+=======
+  var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n =========================  MENSAJE ================ \n ${message} `;
+>>>>>>> 613047b51ae62b97993e4702412273723bdf6d07
 
   var mail = {
     from: "indesan@indesan.com",
