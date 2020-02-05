@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(cors());
-//const mail = require("./routes/mail.js");
+const mail = require("./routes/mail.js");
 const auth = require("./routes/auth");
 const colecciones = require("./routes/colecciones.js");
 const imagenes = require("./routes/imagenes.js");
@@ -29,7 +29,7 @@ app.use("/colecciones", colecciones);
 app.use("/imagenes", imagenes);
 app.use("/usuarios", usuarios);
 app.use("/auth", auth);
-//app.use("/mail", mail);
+app.use("/mail", mail);
 app.use(express.static("./static"));
 
 var port = config.get("PORT") || 3000;
