@@ -32,6 +32,8 @@ app.use("/auth", auth);
 app.use("/mail", mail);
 app.use(express.static("./static"));
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 var port = config.get("PORT") || 3000;
 var sPort = config.get("sPORT") || 5000;
 //si escucha en el puerto 3000 / 5000 es por que no ha podido

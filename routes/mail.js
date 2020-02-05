@@ -23,7 +23,7 @@ var email_recepcion = config.get("email_recepcion");
 //   }
 // };
 
-//console.log("transport: ", transport);
+console.log("transport: ", transport);
 
 var transporter = nodemailer.createTransport(transport);
 
@@ -49,7 +49,7 @@ router.post("/send", (req, res, next) => {
     text: content
   };
 
-  //console.log(mail);
+  console.log(mail);
   transporter.sendMail(mail, (err, data) => {
     if (err) {
       res.json({
@@ -72,7 +72,8 @@ router.post("/send", (req, res, next) => {
     text: `ES: Gracias por contactar con nosotros! \nFR: Merci de nous contacter! \nEN: Thank you for contacting us! \n============================= \n ${content}`
   };
 
-  //console.log(mail2);
+  console.log(mail2);
+
   transporter.sendMail(mail2, (err, data) => {
     if (err) {
       res.json({
