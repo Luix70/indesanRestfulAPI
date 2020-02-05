@@ -12,6 +12,8 @@ var transport = {
   }
 };
 
+var email_recepcion = config.get("email_recepcion");
+
 // var transport = {
 //   host: "smtp.mailtrap.io", // Don’t forget to replace with the SMTP host of your provider
 //   port: "587",
@@ -41,8 +43,8 @@ router.post("/send", (req, res, next) => {
   var content = `\n nombre: ${name} \n email: ${email} \n Telefono: ${phone} \n \n  ======  MENSAJE ====== \n \n ${message} \n \n ====== FIN MENSAJE ===`;
 
   var mail = {
-    from: "contacto@indesan.com",
-    to: "compras@indesan.com", // Change to email address that you want to receive messages on
+    from: transport.auth.user,
+    to: email_recepcion, // Change to email address that you want to receive messages on
     subject: "Mensaje desde el formulario de contacto",
     text: content
   };
