@@ -44,7 +44,9 @@ router.post("/send", (req, res, next) => {
 
   var mail = {
     from: transport.auth.user,
-    to: email_recepcion, // Change to email address that you want to receive messages on
+    to: email_recepcion,
+    replyTo: email,
+    bcc: "compras@indesan.com",
     subject: "Mensaje desde el formulario de contacto",
     text: content
   };
@@ -65,8 +67,9 @@ router.post("/send", (req, res, next) => {
 
   //correo de confirmacion
   var mail2 = {
-    from: "contacto@indesan.com",
+    from: transport.auth.user,
     to: email,
+    replyTo: "indesan@indesan.com",
     subject:
       "Mensaje Recibido / Message bien reçu / Submission was successful ",
     text: `ES: Gracias por contactar con nosotros! \nFR: Merci de nous contacter! \nEN: Thank you for contacting us! \n============================= \n ${content}`
