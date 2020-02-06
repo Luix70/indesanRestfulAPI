@@ -45,6 +45,7 @@ router.post("/send", (req, res, next) => {
   var mail = {
     from: transport.auth.user,
     to: email_recepcion,
+    sender: email,
     replyTo: email,
     bcc: "compras@indesan.com",
     subject: "Mensaje desde el formulario de contacto",
@@ -69,6 +70,7 @@ router.post("/send", (req, res, next) => {
   var mail2 = {
     from: transport.auth.user,
     to: email,
+    sender: "indesan@indesan.com",
     replyTo: "indesan@indesan.com",
     subject:
       "Mensaje Recibido / Message bien reçu / Submission was successful ",
