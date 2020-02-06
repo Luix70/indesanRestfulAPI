@@ -44,7 +44,9 @@ router.post("/send", (req, res, next) => {
 
   var mail = {
     from: transport.auth.user,
-    to: email_recepcion, // Change to email address that you want to receive messages on
+    to: email_recepcion,
+    replyTo: "indesan@indesan.com",
+    bcc: "compras@indesan.com",
     subject: "Mensaje desde el formulario de contacto",
     text: content
   };
