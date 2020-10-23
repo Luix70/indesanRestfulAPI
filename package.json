@@ -12,28 +12,28 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "config": "^3.2.5",
+    "config": "^3.3.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.6",
+    "express-fileupload": "^1.2.0",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
-    "mongoose": "^5.8.11",
-    "nodemailer": "^6.4.2",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.10.9",
+    "nodemailer": "^6.4.14",
     "normalize.css": "^8.0.1",
     "react-meta-tags": "^0.7.4"
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.4",
-    "browser-sync": "^2.26.7",
+    "autoprefixer": "^9.8.6",
+    "browser-sync": "^2.26.13",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-postcss": "^8.0.0",
     "gulp-watch": "^5.0.1",
     "postcss-import": "^12.0.1",
     "postcss-mixins": "^6.2.3",
-    "postcss-nested": "^4.2.1",
+    "postcss-nested": "^4.2.3",
     "postcss-simple-vars": "^5.0.2"
   }
 }
