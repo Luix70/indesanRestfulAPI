@@ -12,20 +12,7 @@ var transport = {
   },
 };
 
-console.log("transport: ", transport);
-
 var email_recepcion = config.get("email_recepcion");
-
-// var transport = {
-//   host: "smtp.mailtrap.io", // Don’t forget to replace with the SMTP host of your provider
-//   port: "587",
-//   auth: {
-//     user: "65f938a78242cb",
-//     pass: "bda7fda18f5443"
-//   }
-// };
-
-//console.log("transport: ", transport);
 
 var transporter = nodemailer.createTransport(transport);
 
