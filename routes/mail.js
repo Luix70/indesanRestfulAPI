@@ -12,6 +12,8 @@ var transport = {
   },
 };
 
+console.log("transport: ", transport);
+
 var email_recepcion = config.get("email_recepcion");
 
 // var transport = {
