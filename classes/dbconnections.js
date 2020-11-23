@@ -13,8 +13,6 @@ const mongoPassword = config.get("DB_PASS");
 
 const mongoConectionString = `${mongoProtocol}://${mongoUser}:${mongoPassword}@${mongoServer}/${mongoDB}`;
 
-console.log(mongoConectionString)
-
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
