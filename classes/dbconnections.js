@@ -43,15 +43,6 @@ async function getColeccionesActivas(callback) {
 async function getColeccion(param, callback) {
   await col.Coleccion.find({ mod: param })
     .then((resultado) => {
-      // if(resultado.length != 0 && !resultado[0].captions ){
-
-      //     resultado[0].captions ={"es":"---------",
-      //                         "fr": "----------",
-      //                         "en": "---------"
-      //                         }
-
-      // }
-
       callback(resultado);
     })
     .catch((err) => {
