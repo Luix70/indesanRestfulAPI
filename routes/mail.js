@@ -8,8 +8,8 @@ var transport = {
   port: config.get("SMTP_PORT"),
   auth: {
     user: config.get("SMTP_USER"),
-    pass: config.get("SMTP_PASS")
-  }
+    pass: config.get("SMTP_PASS"),
+  },
 };
 
 var email_recepcion = config.get("email_recepcion");
@@ -49,7 +49,7 @@ router.post("/send", (req, res, next) => {
     replyTo: email,
     bcc: "compras@indesan.com",
     subject: "Mensaje desde el formulario de contacto",
-    text: content
+    text: content,
   };
 
   //console.log(mail);
@@ -57,11 +57,11 @@ router.post("/send", (req, res, next) => {
     if (err) {
       res.json({
         status: "fail",
-        error: err
+        error: err,
       });
     } else {
       res.json({
-        status: "success"
+        status: "success",
       });
     }
   });
@@ -74,7 +74,7 @@ router.post("/send", (req, res, next) => {
     replyTo: "indesan@indesan.com",
     subject:
       "Mensaje Recibido / Message bien reçu / Submission was successful ",
-    text: `ES: Gracias por contactar con nosotros! \nFR: Merci de nous contacter! \nEN: Thank you for contacting us! \n============================= \n ${content}`
+    text: `ES: Gracias por contactar con nosotros! \nFR: Merci de nous contacter! \nEN: Thank you for contacting us! \n============================= \n ${content}`,
   };
 
   //console.log(mail2);
@@ -83,11 +83,11 @@ router.post("/send", (req, res, next) => {
     if (err) {
       res.json({
         status: "fail",
-        error: err
+        error: err,
       });
     } else {
       res.json({
-        status: "success"
+        status: "success",
       });
     }
   });

@@ -17,8 +17,8 @@ const colSchema = new mongoose.Schema({
   mod: { type: String, required: true, unique: true },
   thumbnail: { type: String, default: "Nothumb_tn" },
   activa: { type: Boolean, default: true },
-  desc: { type: descripSchema, default: descripSchema },
-  captions: { type: captionsSchema, default: captionsSchema },
+  desc: { type: descripSchema, default: () => ({}) },
+  captions: { type: captionsSchema, default: () => ({}) },
 });
 
 const Coleccion = mongoose.model("colecciones", colSchema);
