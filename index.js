@@ -39,10 +39,17 @@ var sPort = config.get("sPORT") || 5000;
 //si escucha en el puerto 3000 / 5000 es por que no ha podido
 //leer las variables de entorno
 
-var httpsOptions = {
-  key: fs.readFileSync("./https/key_ic.pem"),
-  cert: fs.readFileSync("./https/cert_ic.pem")
+
+const httpsOptions = {
+  cert: fs.readFileSync(config.get("TLS_FULLCHAIN")),
+  key: fs.readFileSync(config.get("TLS_PRIVKEY"))
 };
+
+//var httpsOptions = {
+
+  //key: fs.readFileSync("./https/key_ic.pem"),
+  //cert: fs.readFileSync("./https/cert_ic.pem")
+//};
 https.createServer(httpsOptions, app).listen(sPort, () => {
   console.log(`Escuchando (https) en el puerto: ${sPort}`);
 });
